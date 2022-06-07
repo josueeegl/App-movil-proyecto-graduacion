@@ -5,7 +5,7 @@ export default ({ routeName, focused, horizontal, tintColor, color }) => {
   let iconName, iconColor;
   if (routeName === "Home") {
     iconName = `home${focused ? "" : "-outline"}`;
-    iconColor = focused ? "tomato" : "black";
+    iconColor = focused ? "#4F93BC" : "black";
     return (
       <Ionicons
         name={iconName}
@@ -16,7 +16,7 @@ export default ({ routeName, focused, horizontal, tintColor, color }) => {
     );
   } else if (routeName === "Presupuesto") {
     iconName = `account-cash${focused ? "" : "-outline"}`;
-    iconColor = focused ? "tomato" : "black";
+    iconColor = focused ? "#4F93BC" : "black";
     return (
       <MaterialCommunityIcons
         name={iconName}
@@ -26,7 +26,7 @@ export default ({ routeName, focused, horizontal, tintColor, color }) => {
       />
     );
   } else if (routeName === "Opciones") {
-    iconColor = focused ? "tomato" : "black";
+    iconColor = focused ? "#4F93BC" : "black";
     iconName = `person-circle${focused ? "" : "-outline"}`;
     return (
       <Ionicons
@@ -38,7 +38,7 @@ export default ({ routeName, focused, horizontal, tintColor, color }) => {
     );
   } else if (routeName === "Dinero") {
     iconName = `cash${focused ? "" : "-outline"}`;
-    iconColor = focused ? "tomato" : "black";
+    iconColor = focused ? "#4F93BC" : "black";
     return (
       <Ionicons
         name={iconName}

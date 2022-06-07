@@ -1,30 +1,29 @@
 import React from "react";
 import { StyleSheet, Dimensions } from "react-native";
 import { createBottomTabNavigator } from "react-navigation-tabs";
-import {
-  HomeScreen,
-  PresupuestoScreen,
-  DineroScreen,
-  OPScreen,
-} from "../screen";
+
 import { Icono } from "../navigation-bar";
+import AppInicio from "../navigations/Inicio";
+import AppPresupuesto from "../navigations/Presupuesto";
+import AppOpc from "../navigations/Opciones";
+import AppDinero from "../navigations/Dinero";
 
 export const AppNavegador = createBottomTabNavigator(
   {
     Home: {
-          screen: HomeScreen,
-          navigationOptions: {
-            title: "Inicio",
-        }
+      screen: AppInicio,
+      navigationOptions: {
+        title: "Inicio",
+      },
     },
     Presupuesto: {
-      screen: PresupuestoScreen,
+      screen: AppPresupuesto,
     },
     Dinero: {
-      screen: DineroScreen,
+      screen: AppDinero,
     },
     Opciones: {
-      screen: OPScreen,
+      screen: AppOpc,
     },
   },
   {
@@ -41,9 +40,9 @@ export const AppNavegador = createBottomTabNavigator(
           />
         );
       },
-      
+
       tabBarOptions: {
-        activeTintColor: "tomato",
+        activeTintColor: "#4F93BC",
         labelStyle: {
           fontSize: 11,
           bottom: 15,
@@ -51,13 +50,8 @@ export const AppNavegador = createBottomTabNavigator(
         style: {
           position: "absolute",
           backgroundColor: "#FEFEFF",
-          height: 70,
-          bottom: 18,
-          left: 9,
-          right: 9,
-          elevation: 0,
-          borderRadius: 20,
-          ...styles.shadow,
+          height: 80,
+          bottom: 0,
         },
       },
     }),
@@ -66,13 +60,13 @@ export const AppNavegador = createBottomTabNavigator(
 
 const styles = StyleSheet.create({
   shadow: {
-    shadowColor: "tomato",
+    shadowColor: "#4F93BC",
     shadowOffset: {
       width: 0,
       height: 0,
     },
-    shadowOpacity: 0.25,
+    shadowOpacity: 1,
     shadowRadius: 3.5,
-    elevation: 1,
+    elevation: 15,
   },
 });
