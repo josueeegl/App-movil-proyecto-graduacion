@@ -1,29 +1,11 @@
 import React, { useState } from "react";
 import { Text, View, StyleSheet, Dimensions, FlatList } from "react-native";
-
 import { IconButton } from "react-native-paper";
 import { Modal, ListItem } from "../components";
+import useFetch from "../hooks/useFetch";
 
 const tiempoTranscurrido = Date.now();
 const hoy = new Date(tiempoTranscurrido);
-const data = [
-  {
-    _id: "pr1",
-    usuario_id: "01",
-    nombre: "Josue",
-    fecha_inicial: hoy.toLocaleDateString(),
-    monto_inicial: 500,
-    descrip: "presupuesto de educacion",
-  },
-  {
-    _id: "pr2",
-    usuario_id: "01",
-    nombre: "Josue",
-    fecha_inicial: hoy.toLocaleDateString(),
-    monto_inicial: 500,
-    descrip: "presupuesto de educacion",
-  },
-];
 
 export const PresupuestoScreen = ({ navigation }) => {
   const [visibility, setVisibility] = useState(false);
@@ -35,21 +17,30 @@ export const PresupuestoScreen = ({ navigation }) => {
     }
   };
 
+  const { loading, data: presu } = useFetch(
+    "https://yourfinz.herokuapp.com/presupuesto",
+    navigation
+  );
   return (
     <View style={estilos.container}>
-      <FlatList
-        style={estilos.list}
-        data={data}
-        keyExtractor={(x) => x._id}
-        renderItem={({ item }) => (
-          <ListItem
-            onPress={() => navigation.navigate("Detalle", { _id: item._id })}
-            nombre={item.nombre}
-            monto={item.monto_inicial}
-            fecha={item.fecha_inicial}
-          />
-        )}
-      />
+      {loading ? (
+        <Text>Cargando...</Text>
+      ) : (
+        <FlatList
+          style={estilos.list}
+          data={presu}
+          keyExtractor={(x) => x._id}
+          renderItem={({ item }) => (
+            <ListItem
+              onPress={() => navigation.navigate("Detalle", { _id: item._id })}
+              onLongPress={setear}
+              nombre={item.nombre}
+              monto={item.monto_inicial}
+              fecha={item.fecha_inicial}
+            />
+          )}
+        />
+      )}
       <IconButton
         icon="plus-circle"
         color="#4F93BC"
@@ -84,6 +75,7 @@ const estilos = StyleSheet.create({
   },
   list: {
     alignSelf: "stretch",
+    marginBottom: 60,
   },
   btnContainer: {
     position: "absolute",
