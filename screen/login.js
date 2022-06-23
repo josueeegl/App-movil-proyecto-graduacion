@@ -3,17 +3,19 @@ import { Text, TextInput, View, StyleSheet, Dimensions } from "react-native";
 const { width, height } = Dimensions.get("window");
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { SvgTop, ButtonGradient, ButtonReg, ButtonGoogle } from "../styles";
-import useForm from '../hooks/useForm';
+import useForm from "../hooks/useForm";
+import { onSubmitLog } from "../hooks/fetchRegister";
 
 export const LoginScreen = ({ navigation }) => {
   const initialState = {
     email: "",
     password: "",
   };
-  const onSubmit = (values) => {
-    console.log(values);
-  };
-  const { subscribe, inputs, handleSubmit } = useForm(initialState, onSubmit);
+  const { subscribe, inputs, handleSubmit } = useForm(
+    initialState,
+    onSubmitLog,
+    navigation
+  );
   return (
     <KeyboardAwareScrollView style={styles.MainContainer}>
       <View style={styles.containerSVG}>
@@ -27,12 +29,15 @@ export const LoginScreen = ({ navigation }) => {
           onChangeText={subscribe("email")}
           style={styles.input}
           placeholder="Email"
+          autoCapitalize="none"
         />
         <TextInput
+          autoCapitalize="none"
           value={inputs.password}
           onChangeText={subscribe("password")}
           style={styles.input}
           placeholder="contraseña"
+          secureTextEntry={true}
         />
         <ButtonGradient onPress={handleSubmit} texto={"Iniciar sesión"} />
         <Text style={styles.forgotPass}>O continúa con</Text>

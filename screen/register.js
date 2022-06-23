@@ -1,9 +1,23 @@
-import React from "react";
-import { Text, TextInput, View, StyleSheet, Dimensions } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  Alert,
+  Text,
+  TextInput,
+  View,
+  StyleSheet,
+  Dimensions,
+  ActivityIndicator,
+} from "react-native";
 const { width, height } = Dimensions.get("window");
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { SvgTop, ButtonGradient, ButtonReg, ButtonGoogle } from "../styles";
 import useForm from "../hooks/useForm";
+import { onSubmitReg } from "../hooks/fetchRegister";
+import logGoogle from "../hooks/logGoogle";
+import * as Google from "expo-auth-session/providers/google";
+import * as WebBrowser from "expo-web-browser";
+
+WebBrowser.maybeCompleteAuthSession();
 
 export const RegisterScreen = ({ navigation }) => {
   const initialState = {
@@ -11,11 +25,47 @@ export const RegisterScreen = ({ navigation }) => {
     password: "",
     nombre: "",
   };
-  const onSubmit = (values) => {
-    console.log(values);
-  };
-  const { subscribe, inputs, handleSubmit } = useForm(initialState, onSubmit);
+  const { subscribe, inputs, handleSubmit } = useForm(
+    initialState,
+    onSubmitReg,
+    navigation
+  );
 
+  const [accessToken, setAccessToken] = useState();
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    androidClientId:
+      "651270985032-1b66b5p3001h0idg3k4eo80p767h77v7.apps.googleusercontent.com",
+    iosClientId:
+      "651270985032-oji9fogr16k8cm0e871imolu5q37meqa.apps.googleusercontent.com",
+    expoClientId:
+      "651270985032-ufqaq8njjs4uafhh34c43mfefqpdj7ag.apps.googleusercontent.com",
+  });
+
+  useEffect(() => {
+    if (response?.type === "success") {
+      setAccessToken(response.authentication.accessToken);
+    }
+  }, [response]);
+
+  async function getUserData() {
+    if (accessToken) {
+      await fetch("https://www.googleapis.com/userinfo/v2/me", {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      })
+        .then((x) => x.json())
+        .then((x) => {
+          if (x) {
+            console.log(x);
+            Alert.alert(`Bienvenido ${x.name}`, "Registrado correctmente", [
+              {
+                text: "Ir al inicio",
+                onPress: () => navigation.navigate("Login"),
+              },
+            ]);
+          }
+        });
+    }
+  }
   return (
     <KeyboardAwareScrollView style={styles.MainContainer}>
       <View style={styles.containerSVG}>
@@ -31,20 +81,32 @@ export const RegisterScreen = ({ navigation }) => {
           placeholder="Nombre"
         />
         <TextInput
+          autoCapitalize="none"
           value={inputs.email}
           onChangeText={subscribe("email")}
           style={styles.input}
           placeholder="Email"
         />
         <TextInput
+          autoCapitalize="none"
           value={inputs.password}
           onChangeText={subscribe("password")}
           style={styles.input}
           placeholder="contraseña"
+          secureTextEntry={true}
         />
         <ButtonGradient onPress={handleSubmit} texto={"Registrarse"} />
         <Text style={styles.forgotPass}>O continúa con</Text>
-        <ButtonGoogle />
+        <ButtonGoogle
+          onPress={
+            accessToken
+              ? getUserData
+              : () => {
+                  promptAsync({ showInRecents: true });
+                }
+          }
+        />
+
         <ButtonReg
           onPress={() => navigation.navigate("Login")}
           texto={"Volver al inicio"}

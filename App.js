@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View, Dimensions } from "react-native";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
-import { LoginScreen, RegisterScreen } from "./screen";
+import { LoginScreen, RegisterScreen, AuthLoading } from "./screen";
 import { AppNavegador } from "./iniciar";
 
 const OnBoardingNavigator = createStackNavigator(
@@ -23,11 +23,12 @@ const OnBoardingNavigator = createStackNavigator(
 
 const BaseNavigator = createSwitchNavigator(
   {
+    AuthLoading: AuthLoading,
     OnBoarding: OnBoardingNavigator,
     Root: AppNavegador,
   },
   {
-    initialRouteName: "OnBoarding",
+    initialRouteName: "AuthLoading",
   }
 );
-export default createAppContainer(OnBoardingNavigator);
+export default createAppContainer(BaseNavigator);
