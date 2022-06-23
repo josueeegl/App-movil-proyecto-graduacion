@@ -8,16 +8,16 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
-export const ButtonGradient = ({ texto, onPress }) => {
+export const ButtonGradient = ({ texto, onPress, estilos, colores }) => {
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
+    <TouchableOpacity style={estilos ? estilos.container : styles.container} onPress={onPress}>
       <LinearGradient
-        colors={["#1090DD", "#1A7EBA"]}
+        colors={colores ? colores : ["#1090DD", "#1A7EBA"]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
-        style={styles.button}
+        style={estilos ? estilos.button : styles.button}
       >
-        <Text style={styles.text}>{texto}</Text>
+        <Text style={estilos ? estilos.text : styles.text}>{texto}</Text>
       </LinearGradient>
     </TouchableOpacity>
   );

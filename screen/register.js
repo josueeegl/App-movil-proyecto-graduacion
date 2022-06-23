@@ -45,9 +45,10 @@ export const RegisterScreen = ({ navigation }) => {
     if (response?.type === "success") {
       setAccessToken(response.authentication.accessToken);
     }
-  }, [response]);
+  }, []);
 
   async function getUserData() {
+    await promptAsync({ showInRecents: true });
     if (accessToken) {
       await fetch("https://www.googleapis.com/userinfo/v2/me", {
         headers: { Authorization: `Bearer ${accessToken}` },
@@ -97,15 +98,7 @@ export const RegisterScreen = ({ navigation }) => {
         />
         <ButtonGradient onPress={handleSubmit} texto={"Registrarse"} />
         <Text style={styles.forgotPass}>O continúa con</Text>
-        <ButtonGoogle
-          onPress={
-            accessToken
-              ? getUserData
-              : () => {
-                  promptAsync({ showInRecents: true });
-                }
-          }
-        />
+        <ButtonGoogle onPress={getUserData} />
 
         <ButtonReg
           onPress={() => navigation.navigate("Login")}

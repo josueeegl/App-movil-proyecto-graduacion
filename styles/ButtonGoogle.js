@@ -4,14 +4,6 @@ import { StyleSheet, Text, Image, TouchableOpacity, View } from "react-native";
 export const ButtonGoogle = ({ onPress }) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.button}>
-        <Image
-          style={{ width: 50, height: 50 }}
-          source={{
-            uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/220px-2021_Facebook_icon.svg.png",
-          }}
-        />
-      </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={onPress}>
         <Image
           style={{ width: 50, height: 50 }}

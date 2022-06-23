@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Alert } from "react-native";
 
 const useFetch = (url, navigation) => {
   const [loading, setLoading] = useState(true);
@@ -6,9 +7,13 @@ const useFetch = (url, navigation) => {
 
   const fetchData = async () => {
     const response = await fetch(url);
-    const data = await response.json();
-    setData(data);
-    setLoading(false);
+    if (response.status == 200) {
+      const data = await response.json();
+      setData(data);
+      setLoading(false);
+    } else {
+      Alert.alert('Error');
+    }
   };
 
   useEffect(() => {

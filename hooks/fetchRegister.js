@@ -2,7 +2,7 @@ import React from "react";
 import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export const onSubmitReg = (values, navigation) => {
+export const onSubmitReg = (values, navigation, funcion) => {
   fetch(
     `https://yourfinz.herokuapp.com/user/register/?nombre=${values.nombre}&email=${values.email}&password=${values.password}`,
     {
