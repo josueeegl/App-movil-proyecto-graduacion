@@ -7,11 +7,14 @@ import {
   Animated,
   View,
   Dimensions,
+  Alert,
 } from "react-native";
 import { IconButton } from "react-native-paper";
 const ITEM_SIZE = 70 + 20 * 3;
+const { width } = Dimensions.get("window");
 
 export default ({
+  id,
   nombre,
   onPress,
   monto,
@@ -36,71 +39,95 @@ export default ({
     inputRange,
     outputRange: [1, 1, 1, 0],
   });
+  const borrar = () => {
+    Alert.alert("¿Quieres eliminarlo?", "", [
+      {
+        text: "NO",
+        onPress: () => console.log("Cancel Pressed"),
+        style: "cancel",
+      },
+      { text: "SI", onPress: () => console.log(id) },
+    ]);
+  };
   return (
     <Animated.View
       style={{
         width: "98%",
-        height: 100,
+        height: 120,
         alignSelf: "center",
         flexDirection: "row",
         padding: 10,
         paddingLeft: 20,
         marginBottom: 15,
         borderRadius: 8,
-        backgroundColor: "rgba(255,255,255,0.9)",
+        backgroundColor: "#2E323D",
 
         opacity,
         transform: [{ scale }],
       }}
     >
-      <View>
-        <View style={{ flexDirection: "row" }}>
-          <TouchableOpacity onPress={onPress}>
-            <Text
-              style={{
-                fontSize: 20,
-                fontWeight: "700",
-                color: "#212F3D",
-                opacity: 0.9,
-              }}
-            >
-              {nombre}
-            </Text>
-          </TouchableOpacity>
+      <View style={{ flexDirection: "row" }}>
+        <TouchableOpacity onPress={onPress} style={{width: "80%"}}>
+          <Text
+            style={{
+              fontSize: 20,
+              fontWeight: "700",
+              color: "white",
+              opacity: 0.9,
+              marginRight: 10
+            }}
+          >
+            {nombre}
+          </Text>
+          <Text
+            style={{
+              fontSize: 18,
+              opacity: 0.7,
+              color: "#FFDB56",
+            }}
+          >
+            Q{monto}
+          </Text>
+          <Text
+            style={{
+              fontSize: 18,
+              opacity: 0.7,
+              color: "#eee",
+              marginTop: 5,
+            }}
+          >
+            {fecha.toString().split("T")[0]}
+          </Text>
+        </TouchableOpacity>
 
+        <View>
+          <IconButton
+            icon="delete"
+            color="#EF5350"
+            size={30}
+            style={{
+              position: "absolute",
+              right: width - 400,
+              top: -15,
+              alignSelf: "flex-end",
+            }}
+            onPress={borrar}
+          />
           <IconButton
             icon="square-edit-outline"
-            color="#4F93BC"
+            color="#65D271"
             size={30}
-            style={{ position: "absolute", right: -60 }}
+            style={{ position: "absolute", right: width - 445, top: -15 }}
             onPress={onLongPress}
           />
           <IconButton
             icon="arrow-right-circle"
             color="#4F93BC"
             size={30}
-            style={{ position: "absolute", right: -105 }}
+            style={{ position: "absolute", right: width - 490, top: -15 }}
             onPress={onPress}
           />
         </View>
-        <TouchableOpacity
-          style={{ flexDirection: "row", marginTop: 15 }}
-          onPress={onPress}
-        >
-          <Text
-            style={{
-              fontSize: 18,
-              opacity: 0.7,
-              color: "#4F93BC",
-              marginRight: 100,
-            }}
-          >
-            monto
-          </Text>
-          <Text style={{ fontSize: 18, opacity: 0.7, color: "#0099cc" }}>
-            fecha
-          </Text>
-        </TouchableOpacity>
       </View>
     </Animated.View>
   );
@@ -109,7 +136,7 @@ export default ({
 const styles = StyleSheet.create({
   container: {
     padding: 15,
-    height: 70,
+    height: 90,
     justifyContent: "center",
     margin: 10,
     borderRadius: 10,

@@ -26,21 +26,25 @@ export const PresupuestoScreen = ({ navigation }) => {
       setVisibility(true);
     }
   };
+  const limpiar = () => {
+    setear();
+    setInputs("");
+  };
   const initialState = {
     monto_inicial: "",
     descrip: "",
     nombre: "",
   };
-  const { subscribe, inputs, handleSubmit } = useForm(
+  const { subscribe, inputs, handleSubmit, setInputs } = useForm(
     initialState,
     onSubmit,
     navigation,
-    setear
+    limpiar
   );
   const scrollY = React.useRef(new Animated.Value(0)).current;
 
   const { loading, data: presu } = useFetch(
-    "http://192.168.140.222:3000/presupuesto",
+    "http://192.168.0.17:3000/presupuesto",
     navigation
   );
   return (
@@ -67,6 +71,7 @@ export const PresupuestoScreen = ({ navigation }) => {
               fecha={item.fecha_inicial}
               index={index}
               scrollY={scrollY}
+              id={item._id}
             />
           )}
         />
@@ -80,7 +85,7 @@ export const PresupuestoScreen = ({ navigation }) => {
       />
       <Modal
         visibility={visibility}
-        setear={setear}
+        setear={limpiar}
         inputs={inputs}
         subscribe={subscribe}
         handleSubmit={handleSubmit}
@@ -96,7 +101,7 @@ const estilos = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "rgb(174, 182, 191)",
+    backgroundColor: "#B3B6B7",
     alignItems: "center",
     justifyContent: "flex-start",
   },

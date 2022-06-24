@@ -12,11 +12,14 @@ const AppPresupuesto = createStackNavigator(
       screen: PresupuestoScreen,
       navigationOptions: {
         title: "Presupuesto",
+
+        headerStyle: {
+          backgroundColor: "#ECF0F1",
+        },
       },
     },
     Detalle: {
       screen: detallePresupuesto,
-      
     },
   },
   {

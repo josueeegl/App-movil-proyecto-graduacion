@@ -2,10 +2,10 @@ import React from "react";
 import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export const onSubmit = (values, navigation, limpiar) => {
+export const onDelete = (values, url) => {
   AsyncStorage.getItem("token").then((x) => {
     if (x) {
-      fetch("http://192.168.140.222:3000/presupuesto", {
+      fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -21,7 +21,7 @@ export const onSubmit = (values, navigation, limpiar) => {
           {
             text: "Ok",
             onPress: () => {
-              limpiar();
+              
             },
           },
         ]);
