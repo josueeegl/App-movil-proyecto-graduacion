@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { or } from "react-native-reanimated";
 
-export const onSubmit = (values, navigation, limpiar) => {
+export const onSubmit = (values, navigation, limpiar, url, texto, id) => {
   AsyncStorage.getItem("token").then((x) => {
     if (x) {
-      fetch("http://192.168.140.222:3000/presupuesto", {
-        method: "POST",
+      if (texto === "Actualizar") {
+        url += id;
+      }
+      console.log(url);
+      fetch(url, {
+        method: texto === "Actualizar" ? "PUT" : "POST",
         headers: {
           "Content-Type": "application/json",
           authorization: x,
@@ -14,17 +19,17 @@ export const onSubmit = (values, navigation, limpiar) => {
         body: JSON.stringify(values),
       }).then((x) => {
         console.log(x.status);
-        if (x.status !== 201) {
-          return Alert.alert("Error :(", "No se pudo ingresar");
-        }
-        Alert.alert("Exito!", "Cambios realizados", [
-          {
-            text: "Ok",
-            onPress: () => {
-              limpiar();
+        if (x.status == 201 || x.status == 204) {
+          return Alert.alert("Exito!", "Cambios realizados", [
+            {
+              text: "Ok",
+              onPress: () => {
+                limpiar();
+              },
             },
-          },
-        ]);
+          ]);
+        }
+        Alert.alert("Error :(", "No se pudieron realizar los cambios");
       });
     }
   });

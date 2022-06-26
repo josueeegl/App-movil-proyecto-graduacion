@@ -19,9 +19,12 @@ export default ({
   onPress,
   monto,
   fecha,
-  onLongPress,
+  descrip,
+  editar,
   index,
   scrollY,
+  onDelete,
+  setLoading,
 }) => {
   const inputRange = [-1, 0, ITEM_SIZE * index, ITEM_SIZE * (index + 2)];
   const OpactityinputRange = [
@@ -46,9 +49,18 @@ export default ({
         onPress: () => console.log("Cancel Pressed"),
         style: "cancel",
       },
-      { text: "SI", onPress: () => console.log(id) },
+      {
+        text: "SI",
+        onPress: () => {
+          console.log(id);
+          onDelete(id, "http://192.168.235.222:3000/presupuesto", setLoading);
+        },
+      },
     ]);
   };
+  const alterar = () => {
+    editar(monto, descrip, nombre, id);
+  }
   return (
     <Animated.View
       style={{
@@ -67,14 +79,14 @@ export default ({
       }}
     >
       <View style={{ flexDirection: "row" }}>
-        <TouchableOpacity onPress={onPress} style={{width: "80%"}}>
+        <TouchableOpacity onPress={onPress} style={{ width: "80%" }}>
           <Text
             style={{
               fontSize: 20,
               fontWeight: "700",
               color: "white",
               opacity: 0.9,
-              marginRight: 10
+              marginRight: 10,
             }}
           >
             {nombre}
@@ -118,7 +130,7 @@ export default ({
             color="#65D271"
             size={30}
             style={{ position: "absolute", right: width - 445, top: -15 }}
-            onPress={onLongPress}
+            onPress={alterar}
           />
           <IconButton
             icon="arrow-right-circle"

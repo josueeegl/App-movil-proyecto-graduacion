@@ -1,17 +1,19 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   StyleSheet,
   Dimensions,
   Modal,
   View,
   TextInput,
-  Text,
+  Text
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { IconButton } from "react-native-paper";
 import { ButtonGradient } from "../styles";
 
-export default ({ visibility, setear, inputs, subscribe, handleSubmit }) => {
+export default ({ visibility, setear, inputs, subscribe, handleSubmit, texto }) => {
+  
+
   return (
     <Modal animationType="slide" transparent={true} visible={visibility}>
       <View style={styles.contenido}>
@@ -32,15 +34,15 @@ export default ({ visibility, setear, inputs, subscribe, handleSubmit }) => {
             placeholder="Descripción"
           />
           <TextInput
-            value={inputs.monto}
+            value={inputs.monto_inicial}
             onChangeText={subscribe("monto_inicial")}
             style={styles.input}
-            placeholder="Monto inicial"
+            placeholder="Valor"
             keyboardType="numeric"
           />
           <ButtonGradient
             onPress={handleSubmit}
-            texto={"Listo"}
+            texto={texto}
             estilos={styles}
           />
           <ButtonGradient

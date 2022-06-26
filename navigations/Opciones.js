@@ -9,6 +9,9 @@ const AppOpc = createStackNavigator({
     screen: OPScreen,
     navigationOptions: {
       title: "Opciones",
+      headerStyle: {
+        backgroundColor: "#ECF0F1",
+      },
     },
   },
 });

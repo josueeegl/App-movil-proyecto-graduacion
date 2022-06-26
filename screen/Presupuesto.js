@@ -8,18 +8,24 @@ import {
   FlatList,
   Animated,
   ActivityIndicator,
+  Image,
 } from "react-native";
 import { IconButton } from "react-native-paper";
 import { Modal, ListItem } from "../components";
 import useFetch from "../hooks/useFetch";
+import { onDelete } from "../hooks/fetchEliminar";
 import useForm from "../hooks/useForm";
 import { onSubmit } from "../hooks/fetchX";
 
-const url = "https://yourfinz.herokuapp.com/presupuesto";
+const url = "http://192.168.235.222:3000/presupuesto";
 
 export const PresupuestoScreen = ({ navigation }) => {
   const [visibility, setVisibility] = useState(false);
+  const [texto, setTexto] = useState("Listo");
+  const [id, setId] = useState();
+  const [Datos, setDatos] = useState();
   const setear = () => {
+    setTexto("Listo");
     if (visibility === true) {
       setVisibility(false);
     } else {
@@ -29,6 +35,16 @@ export const PresupuestoScreen = ({ navigation }) => {
   const limpiar = () => {
     setear();
     setInputs("");
+    setLoading(true);
+  };
+  const editar = (monto_inicial, descrip, nombre, id) => {
+    setear();
+    initialState.descrip = descrip;
+    initialState.monto_inicial = monto_inicial.toString();
+    initialState.nombre = nombre;
+    setInputs(initialState);
+    setTexto("Actualizar");
+    setId(id);
   };
   const initialState = {
     monto_inicial: "",
@@ -39,14 +55,20 @@ export const PresupuestoScreen = ({ navigation }) => {
     initialState,
     onSubmit,
     navigation,
-    limpiar
+    limpiar,
+    url,
+    texto,
+    id
   );
   const scrollY = React.useRef(new Animated.Value(0)).current;
 
-  const { loading, data: presu } = useFetch(
-    "http://192.168.0.17:3000/presupuesto",
-    navigation
-  );
+  const {
+    setLoading,
+    loading,
+    data: presu,
+    info,
+  } = useFetch("http://192.168.235.222:3000/presupuesto", navigation);
+
   return (
     <View style={estilos.container}>
       {loading ? (
@@ -54,27 +76,55 @@ export const PresupuestoScreen = ({ navigation }) => {
           <ActivityIndicator size="large" color="white" />
         </View>
       ) : (
-        <Animated.FlatList
-          style={estilos.list}
-          data={presu}
-          onScroll={Animated.event(
-            [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-            { useNativeDriver: true }
-          )}
-          keyExtractor={(x) => x._id}
-          renderItem={({ item, index }) => (
-            <ListItem
-              onPress={() => navigation.navigate("Detalle", { _id: item._id })}
-              onLongPress={setear}
-              nombre={item.nombre}
-              monto={item.monto_inicial}
-              fecha={item.fecha_inicial}
-              index={index}
-              scrollY={scrollY}
-              id={item._id}
+        <View style={{ width: "98%", height: "89%", top: 3 }}>
+          {info ? (
+            <Animated.FlatList
+              style={estilos.list}
+              data={presu}
+              onScroll={Animated.event(
+                [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+                { useNativeDriver: true }
+              )}
+              keyExtractor={(x) => x._id}
+              renderItem={({ item, index }) => (
+                <ListItem
+                  onPress={() =>
+                    navigation.navigate("Detalle", { _id: item._id })
+                  }
+                  descrip={item.descrip}
+                  editar={editar}
+                  nombre={item.nombre}
+                  monto={item.monto_inicial}
+                  fecha={item.fecha_inicial}
+                  index={index}
+                  scrollY={scrollY}
+                  id={item._id}
+                  onDelete={onDelete}
+                  setLoading={setLoading}
+                />
+              )}
             />
+          ) : (
+            <View
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+                height: "100%",
+              }}
+            >
+              <Image
+                style={{ width: 130, height: 130, marginBottom: 15 }}
+                source={require("../assets/caja.png")}
+              />
+              <Text style={{ fontSize: 18, fontWeight: "bold", color: "gray" }}>
+                No tienes presupuestos registrados.
+              </Text>
+              <Text style={{ fontSize: 14, color: "gray" }}>
+                Para crear uno nuevo, haz clic en (+)
+              </Text>
+            </View>
           )}
-        />
+        </View>
       )}
       <IconButton
         icon="plus-circle"
@@ -89,6 +139,7 @@ export const PresupuestoScreen = ({ navigation }) => {
         inputs={inputs}
         subscribe={subscribe}
         handleSubmit={handleSubmit}
+        texto={texto}
       ></Modal>
     </View>
   );
@@ -101,14 +152,13 @@ const estilos = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "#B3B6B7",
+    backgroundColor: "#D0D3D4",
     alignItems: "center",
     justifyContent: "flex-start",
   },
   list: {
     top: 3,
     alignSelf: "stretch",
-    marginBottom: 60,
   },
   btnContainer: {
     position: "absolute",

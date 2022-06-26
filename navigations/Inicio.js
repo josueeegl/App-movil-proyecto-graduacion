@@ -9,6 +9,9 @@ const AppInicio = createStackNavigator({
     screen: HomeScreen,
     navigationOptions: {
       title: "Inicio",
+      headerStyle: {
+        backgroundColor: "#ECF0F1",
+      },
     },
   },
 });
