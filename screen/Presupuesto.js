@@ -9,6 +9,7 @@ import {
   Animated,
   ActivityIndicator,
   Image,
+  StatusBar,
 } from "react-native";
 import { IconButton } from "react-native-paper";
 import { Modal, ListItem } from "../components";
@@ -71,12 +72,13 @@ export const PresupuestoScreen = ({ navigation }) => {
 
   return (
     <View style={estilos.container}>
+      <StatusBar barStyle="light-content" />
       {loading ? (
         <View style={estilos.Acti}>
           <ActivityIndicator size="large" color="white" />
         </View>
       ) : (
-        <View style={{ width: "98%", height: "89%", top: 3 }}>
+        <View style={{ width: "98%", height: "100%", top: StatusBar.length + 18 }}>
           {info ? (
             <Animated.FlatList
               style={estilos.list}
@@ -152,7 +154,7 @@ const estilos = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "#D0D3D4",
+    backgroundColor: "#393943",
     alignItems: "center",
     justifyContent: "flex-start",
   },

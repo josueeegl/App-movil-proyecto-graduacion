@@ -49,7 +49,7 @@ export const AppNavegador = createBottomTabNavigator(
         },
         style: {
           position: "absolute",
-          backgroundColor: "#ECF0F1",
+          backgroundColor: "#47474F",
           height: 80,
           bottom: 0,
         },

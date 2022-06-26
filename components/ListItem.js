@@ -39,6 +39,7 @@ export default ({
     outputRange: [1, 1, 1, 0],
   });
   const opacity = scrollY.interpolate({
+    
     inputRange,
     outputRange: [1, 1, 1, 0],
   });

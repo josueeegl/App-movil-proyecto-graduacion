@@ -10,7 +10,7 @@ const AppDinero = createStackNavigator({
     navigationOptions: {
       title: "Inicio",
       headerStyle: {
-        backgroundColor: "#ECF0F1",
+        backgroundColor: "#47474F",
       },
     },
   },
