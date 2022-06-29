@@ -31,7 +31,7 @@ export const detallePresupuesto = ({ navigation }) => {
     loading,
     data: transacciones,
     info,
-  } = useFetch("http://192.168.235.222:3000/presupuesto", navigation);
+  } = useFetch("http://192.168.187.222:3000/presupuesto", navigation);
 
   return (
     <View style={styles.container}>
