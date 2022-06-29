@@ -8,9 +8,10 @@ const AppDinero = createStackNavigator({
   Home: {
     screen: DineroScreen,
     navigationOptions: {
-      title: "Inicio",
+      headerShown: false,
+      headerTintColor: "white",
       headerStyle: {
-        backgroundColor: "#47474F",
+        backgroundColor: "#7B7D7D",
       },
     },
   },

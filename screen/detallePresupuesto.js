@@ -7,8 +7,7 @@ import {
   ActivityIndicator,
   StatusBar,
   Dimensions,
-  Image,
-  FlatList,
+  Image
 } from "react-native";
 import fetchTransaction from "../hooks/fetchTransactions";
 import { IconButton } from "react-native-paper";
@@ -37,7 +36,8 @@ export const detallePresupuesto = ({ navigation }) => {
     `https://yourfinz.herokuapp.com/transacciones${id_presupuesto}`,
     navigation
   );
-
+  const totales = transacciones.slice(0, 3);
+  const nuevo = transacciones.filter((item) => typeof item === "object");
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" />
@@ -47,7 +47,7 @@ export const detallePresupuesto = ({ navigation }) => {
         </View>
       ) : (
         <View
-          style={{ width: "98%", height: "100%", top: StatusBar.length + 18 }}
+          style={{ width: "98%", height: "90%", top: StatusBar.length + 18 }}
         >
           {info ? (
             <>
@@ -67,12 +67,12 @@ export const detallePresupuesto = ({ navigation }) => {
                 <Text
                   style={{
                     marginTop: 10,
-                    color: "#4F93BC",
+                    color: totales[2] < 0 ? "#C75256" : '#66BA69' ,
                     fontWeight: "bold",
                     fontSize: 18,
                   }}
                 >
-                  Q1000
+                  Q {totales[2]}
                 </Text>
               </View>
               <View
@@ -99,7 +99,7 @@ export const detallePresupuesto = ({ navigation }) => {
                       fontSize: 16,
                     }}
                   >
-                    Q1000
+                    Q {totales[0]}
                   </Text>
                 </View>
                 <View style={styles.viewContentRow}>
@@ -114,19 +114,27 @@ export const detallePresupuesto = ({ navigation }) => {
                       fontSize: 16,
                     }}
                   >
-                    Q1000
+                    Q {totales[1]}
                   </Text>
                 </View>
               </View>
               <SectionList
                 keyExtractor={(item, index) => index.toString()}
-                sections={transacciones}
+                sections={nuevo.reverse()}
                 renderItem={({ item }) => (
                   <ListRegistros items={item} setLoading={setLoading} />
                 )}
                 renderSectionHeader={({ section }) => (
-                  <View style={styles.item}>
-                    <Text style={styles.text}>{section.title}</Text>
+                  <View style={{ paddingLeft: 20, marginBottom: 20 }}>
+                    <Text
+                      style={{
+                        color: "white",
+                        fontSize: 20,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {section.title}
+                    </Text>
                   </View>
                 )}
               />
@@ -143,7 +151,14 @@ export const detallePresupuesto = ({ navigation }) => {
                 style={{ width: 130, height: 130, marginBottom: 15 }}
                 source={require("../assets/caja.png")}
               />
-              <Text style={{ fontSize: 18, fontWeight: "bold", color: "gray" }}>
+              <Text
+                style={{
+                  fontSize: 18,
+                  fontWeight: "bold",
+                  color: "gray",
+                  margin: 5,
+                }}
+              >
                 Aún no tienes ingresos o gastos registrados.
               </Text>
               <Text style={{ fontSize: 14, color: "gray" }}>
@@ -155,8 +170,8 @@ export const detallePresupuesto = ({ navigation }) => {
       )}
       <IconButton
         icon="plus-circle"
-        color="#66BA69"
-        size={60}
+        color="#4F93BC"
+        size={50}
         onPress={setear}
         style={styles.btnContainer}
       />
@@ -168,7 +183,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     backgroundColor: "#393943",
   },
   Acti: {
@@ -177,8 +192,8 @@ const styles = StyleSheet.create({
   },
   btnContainer: {
     position: "absolute",
-    bottom: 70,
-    right: -5,
+    bottom: height - 80,
+    right: -12,
   },
   txtheaders: {
     color: "#D0D3D4",

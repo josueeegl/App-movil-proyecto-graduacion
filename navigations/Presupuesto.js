@@ -25,11 +25,7 @@ const AppPresupuesto = createStackNavigator(
     Home: {
       screen: PresupuestoScreen,
       navigationOptions: {
-        headerShown: false,
-        headerTintColor: "white",
-        headerStyle: {
-          backgroundColor: "#7B7D7D",
-        },
+        headerShown: false
       },
     },
     Detalle: {

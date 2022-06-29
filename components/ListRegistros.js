@@ -12,27 +12,6 @@ import { IconButton } from "react-native-paper";
 const { width } = Dimensions.get("window");
 
 export default ({ items, index, setLoading }) => {
-  console.log(items);
-  /*
-  const borrar = () => {
-    Alert.alert("¿Quieres eliminarlo?", "", [
-      {
-        text: "NO",
-        onPress: () => console.log("Cancel Pressed"),
-        style: "cancel",
-      },
-      {
-        text: "SI",
-        onPress: () => {
-          console.log(id);
-          onDelete(id, "https://yourfinz.herokuapp.com/presupuesto", setLoading);
-        },
-      },
-    ]);
-  };
-  const alterar = () => {
-    editar(monto, descrip, nombre, id);
-  };*/
   return (
     <View
       style={{
@@ -44,34 +23,32 @@ export default ({ items, index, setLoading }) => {
     >
       <View style={{ flexDirection: "row" }}>
         <Image
-          source={require("../assets/spider.jpg")}
+          source={{ uri: items.imagen.secure_url }}
           style={{ width: 60, height: 60, borderRadius: 60 / 2 }}
         />
         <TouchableOpacity
           onPress={() => {
-            console.log("Click item");
+            console.log(items._id);
           }}
-          style={{ width: "80%", marginHorizontal: 10 }}
+          style={{ width: "80%", marginHorizontal: 20 }}
         >
           <Text style={styles.txtheaders}>{items.nombre}</Text>
           <Text style={{ color: "#D0D3D4", fontSize: 16, opacity: 0.5 }}>
-            cash
+            {items.tipo_pago}
           </Text>
         </TouchableOpacity>
         <View>
-          <IconButton
-            icon="delete"
-            color="#EF5350"
-            size={30}
+          <Text
             style={{
+              color: items.tipo ==='gasto' ? "#C75256" : "#66BA69",
+              fontSize: 16,
               position: "absolute",
-              top: -15,
+              right: width - (width - 35),
               alignSelf: "flex-end",
             }}
-            onPress={() => {
-              console.log("Eliminar");
-            }}
-          />
+          >
+            Q {items.valor}
+          </Text>
         </View>
       </View>
     </View>
@@ -87,7 +64,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   txtheaders: {
-    color: "#D0D3D4",
+    color: "white",
     fontSize: 18,
   },
 });
