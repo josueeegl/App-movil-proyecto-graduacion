@@ -12,6 +12,8 @@ import { IconButton } from "react-native-paper";
 const { width } = Dimensions.get("window");
 
 export default ({ items, index, setLoading }) => {
+  console.log(items);
+  /*
   const borrar = () => {
     Alert.alert("¿Quieres eliminarlo?", "", [
       {
@@ -23,14 +25,14 @@ export default ({ items, index, setLoading }) => {
         text: "SI",
         onPress: () => {
           console.log(id);
-          onDelete(id, "http://192.168.235.222:3000/presupuesto", setLoading);
+          onDelete(id, "https://yourfinz.herokuapp.com/presupuesto", setLoading);
         },
       },
     ]);
   };
   const alterar = () => {
     editar(monto, descrip, nombre, id);
-  };
+  };*/
   return (
     <View
       style={{
@@ -51,7 +53,7 @@ export default ({ items, index, setLoading }) => {
           }}
           style={{ width: "80%", marginHorizontal: 10 }}
         >
-          <Text style={styles.txtheaders}>Restaurante</Text>
+          <Text style={styles.txtheaders}>{items.nombre}</Text>
           <Text style={{ color: "#D0D3D4", fontSize: 16, opacity: 0.5 }}>
             cash
           </Text>

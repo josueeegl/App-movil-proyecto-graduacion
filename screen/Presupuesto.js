@@ -18,7 +18,7 @@ import { onDelete } from "../hooks/fetchEliminar";
 import useForm from "../hooks/useForm";
 import { onSubmit } from "../hooks/fetchX";
 
-const url = "http://192.168.187.222:3000/presupuesto";
+const url = "https://yourfinz.herokuapp.com/presupuesto";
 
 export const PresupuestoScreen = ({ navigation }) => {
   const [visibility, setVisibility] = useState(false);
@@ -68,7 +68,7 @@ export const PresupuestoScreen = ({ navigation }) => {
     loading,
     data: presu,
     info,
-  } = useFetch("http://192.168.187.222:3000/presupuesto", navigation);
+  } = useFetch("https://yourfinz.herokuapp.com/presupuesto", navigation);
 
   return (
     <View style={estilos.container}>

@@ -9,7 +9,6 @@ export const onSubmit = (values, navigation, limpiar, url, texto, id) => {
       if (texto === "Actualizar") {
         url += id;
       }
-      console.log(url);
       fetch(url, {
         method: texto === "Actualizar" ? "PUT" : "POST",
         headers: {

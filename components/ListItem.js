@@ -54,7 +54,7 @@ export default ({
         text: "SI",
         onPress: () => {
           console.log(id);
-          onDelete(id, "http://192.168.235.222:3000/presupuesto", setLoading);
+          onDelete(id, "https://yourfinz.herokuapp.com/presupuesto", setLoading);
         },
       },
     ]);

@@ -3,15 +3,17 @@ import {
   Text,
   View,
   StyleSheet,
-  FlatList,
+  SectionList,
   ActivityIndicator,
   StatusBar,
   Dimensions,
+  Image,
+  FlatList,
 } from "react-native";
-import useFetch from "../hooks/useFetch";
+import fetchTransaction from "../hooks/fetchTransactions";
 import { IconButton } from "react-native-paper";
-
 import { ListRegistros } from "../components";
+
 const { width, height } = Dimensions.get("window");
 
 export const detallePresupuesto = ({ navigation }) => {
@@ -31,7 +33,10 @@ export const detallePresupuesto = ({ navigation }) => {
     loading,
     data: transacciones,
     info,
-  } = useFetch("http://192.168.187.222:3000/presupuesto", navigation);
+  } = fetchTransaction(
+    `https://yourfinz.herokuapp.com/transacciones${id_presupuesto}`,
+    navigation
+  );
 
   return (
     <View style={styles.container}>
@@ -113,16 +118,16 @@ export const detallePresupuesto = ({ navigation }) => {
                   </Text>
                 </View>
               </View>
-              <FlatList
-                data={transacciones}
-                keyExtractor={(x) => x._id}
-                renderItem={({ item, index }) => (
-                  <ListRegistros
-                    onPress={() => console.log(item._id)}
-                    items={item}
-                    index={index}
-                    setLoading={setLoading}
-                  />
+              <SectionList
+                keyExtractor={(item, index) => index.toString()}
+                sections={transacciones}
+                renderItem={({ item }) => (
+                  <ListRegistros items={item} setLoading={setLoading} />
+                )}
+                renderSectionHeader={({ section }) => (
+                  <View style={styles.item}>
+                    <Text style={styles.text}>{section.title}</Text>
+                  </View>
                 )}
               />
             </>
@@ -139,10 +144,10 @@ export const detallePresupuesto = ({ navigation }) => {
                 source={require("../assets/caja.png")}
               />
               <Text style={{ fontSize: 18, fontWeight: "bold", color: "gray" }}>
-                Aún no hay registros.
+                Aún no tienes ingresos o gastos registrados.
               </Text>
               <Text style={{ fontSize: 14, color: "gray" }}>
-                Para agregar uno nuevo, haz clic en (+)
+                Crea uno haciendo clic en (+)
               </Text>
             </View>
           )}
