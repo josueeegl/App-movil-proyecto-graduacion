@@ -7,11 +7,11 @@ import {
   ActivityIndicator,
   StatusBar,
   Dimensions,
-  Image
+  Image,
 } from "react-native";
 import fetchTransaction from "../hooks/fetchTransactions";
 import { IconButton } from "react-native-paper";
-import { ListRegistros } from "../components";
+import { ListRegistros, ModalTransactions } from "../components";
 
 const { width, height } = Dimensions.get("window");
 
@@ -33,7 +33,7 @@ export const detallePresupuesto = ({ navigation }) => {
     data: transacciones,
     info,
   } = fetchTransaction(
-    `https://yourfinz.herokuapp.com/transacciones${id_presupuesto}`,
+    `http://192.168.37.222:3000/transacciones${id_presupuesto}`,
     navigation
   );
   const totales = transacciones.slice(0, 3);
@@ -66,10 +66,10 @@ export const detallePresupuesto = ({ navigation }) => {
                 <Text style={styles.txtheaders}>Balance</Text>
                 <Text
                   style={{
-                    marginTop: 10,
-                    color: totales[2] < 0 ? "#C75256" : '#66BA69' ,
+                    marginTop: 5,
+                    color: totales[2] < 0 ? "#C75256" : "#66BA69",
                     fontWeight: "bold",
-                    fontSize: 18,
+                    fontSize: 14,
                   }}
                 >
                   Q {totales[2]}
@@ -89,14 +89,14 @@ export const detallePresupuesto = ({ navigation }) => {
               >
                 <View style={styles.viewContentRow}>
                   <View style={styles.viewRow}>
-                    <IconButton icon="layers-plus" color="#D0D3D4" size={30} />
+                    <IconButton icon="layers-plus" color="#D0D3D4" size={25} />
                     <Text style={styles.txtheaders}>Ingresos</Text>
                   </View>
                   <Text
                     style={{
                       color: "#66BA69",
                       fontWeight: "bold",
-                      fontSize: 16,
+                      fontSize: 14,
                     }}
                   >
                     Q {totales[0]}
@@ -104,14 +104,14 @@ export const detallePresupuesto = ({ navigation }) => {
                 </View>
                 <View style={styles.viewContentRow}>
                   <View style={styles.viewRow}>
-                    <IconButton icon="layers-minus" color="#D0D3D4" size={30} />
+                    <IconButton icon="layers-minus" color="#D0D3D4" size={25} />
                     <Text style={styles.txtheaders}>Gastos</Text>
                   </View>
                   <Text
                     style={{
                       color: "#C75256",
                       fontWeight: "bold",
-                      fontSize: 16,
+                      fontSize: 14,
                     }}
                   >
                     Q {totales[1]}
@@ -129,7 +129,7 @@ export const detallePresupuesto = ({ navigation }) => {
                     <Text
                       style={{
                         color: "white",
-                        fontSize: 20,
+                        fontSize: 16,
                         fontWeight: "bold",
                       }}
                     >
@@ -175,6 +175,12 @@ export const detallePresupuesto = ({ navigation }) => {
         onPress={setear}
         style={styles.btnContainer}
       />
+      <ModalTransactions
+        visibility={visibility}
+        setVisibility={setVisibility}
+        ID={id_presupuesto}
+        setLoading={setLoading}
+      />
     </View>
   );
 };
@@ -199,7 +205,7 @@ const styles = StyleSheet.create({
     color: "#D0D3D4",
     letterSpacing: 2,
     fontWeight: "bold",
-    fontSize: 18,
+    fontSize: 16,
   },
   viewContentRow: {
     flex: 1,

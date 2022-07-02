@@ -33,14 +33,14 @@ export default ({ items, index, setLoading }) => {
           style={{ width: "80%", marginHorizontal: 20 }}
         >
           <Text style={styles.txtheaders}>{items.nombre}</Text>
-          <Text style={{ color: "#D0D3D4", fontSize: 16, opacity: 0.5 }}>
+          <Text style={{ color: "#D0D3D4", fontSize: 14, opacity: 0.5 }}>
             {items.tipo_pago}
           </Text>
         </TouchableOpacity>
         <View>
           <Text
             style={{
-              color: items.tipo ==='gasto' ? "#C75256" : "#66BA69",
+              color: items.tipo ==='Gasto' ? "#C75256" : "#66BA69",
               fontSize: 16,
               position: "absolute",
               right: width - (width - 35),
@@ -65,6 +65,6 @@ const styles = StyleSheet.create({
   },
   txtheaders: {
     color: "white",
-    fontSize: 18,
+    fontSize: 16,
   },
 });

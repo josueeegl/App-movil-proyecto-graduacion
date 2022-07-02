@@ -17,6 +17,7 @@ import useFetch from "../hooks/useFetch";
 import { onDelete } from "../hooks/fetchEliminar";
 import useForm from "../hooks/useForm";
 import { onSubmit } from "../hooks/fetchX";
+import { Apploader } from "../components/loader";
 
 const url = "https://yourfinz.herokuapp.com/presupuesto";
 
@@ -74,9 +75,7 @@ export const PresupuestoScreen = ({ navigation }) => {
     <View style={estilos.container}>
       <StatusBar barStyle="light-content" />
       {loading ? (
-        <View style={estilos.Acti}>
-          <ActivityIndicator size="large" color="white" />
-        </View>
+        <Apploader />
       ) : (
         <View style={{ width: "98%", height: "100%", top: StatusBar.length + 18 }}>
           {info ? (

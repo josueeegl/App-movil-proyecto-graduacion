@@ -1,12 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
 import { Text, TextInput, View, StyleSheet, Dimensions } from "react-native";
 const { width, height } = Dimensions.get("window");
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { SvgTop, ButtonGradient, ButtonReg, ButtonGoogle } from "../styles";
 import useForm from "../hooks/useForm";
 import { onSubmitLog } from "../hooks/fetchRegister";
+import { Apploader } from "../components/loader";
 
 export const LoginScreen = ({ navigation }) => {
+  const [loader, setLoader] = useState(false);
   const initialState = {
     email: "",
     password: "",
@@ -14,9 +16,11 @@ export const LoginScreen = ({ navigation }) => {
   const { subscribe, inputs, handleSubmit } = useForm(
     initialState,
     onSubmitLog,
-    navigation
+    navigation,
+    setLoader
   );
   return (
+    <>
     <KeyboardAwareScrollView style={styles.MainContainer}>
       <View style={styles.containerSVG}>
         <SvgTop />
@@ -48,7 +52,9 @@ export const LoginScreen = ({ navigation }) => {
           texto={"Regístrate"}
         />
       </View>
-    </KeyboardAwareScrollView>
+      </KeyboardAwareScrollView>
+      {loader ? <Apploader /> : null}
+    </>
   );
 };
 

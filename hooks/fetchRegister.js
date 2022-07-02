@@ -23,7 +23,8 @@ export const onSubmitReg = (values, navigation, funcion) => {
     });
 };
 
-export const onSubmitLog = (values, navigation) => {
+export const onSubmitLog = (values, navigation, setLoader) => {
+  setLoader(true);
   fetch(
     `https://yourfinz.herokuapp.com/user/login/?email=${values.email}&password=${values.password}`,
     {
@@ -39,8 +40,12 @@ export const onSubmitLog = (values, navigation) => {
       }
     })
     .then((x) => {
+      setLoader(false);
       AsyncStorage.setItem("token", x.token);
       navigation.navigate("Root");
     })
-    .catch((e) => Alert.alert("Error :(", e));
+    .catch((e) => {
+      setLoader(false);
+      Alert.alert("Error :(", e);
+    });
 };
