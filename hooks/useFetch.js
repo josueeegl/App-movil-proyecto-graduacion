@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const useFetch = (url, navigation) => {
+const useFetch = (url, navigation, setLoader) => {
   const [loading, setLoading] = useState(true);
   const [info, setInfo] = useState(true);
   const [data, setData] = useState([]);
@@ -19,6 +19,7 @@ const useFetch = (url, navigation) => {
         const data = await response.json();
         setData(data);
         setLoading(false);
+        setLoader(false);
         if (data.length === 0) {
           setInfo(false);
         } else {

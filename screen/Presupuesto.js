@@ -19,13 +19,15 @@ import useForm from "../hooks/useForm";
 import { onSubmit } from "../hooks/fetchX";
 import { Apploader } from "../components/loader";
 
-const url = "https://yourfinz.herokuapp.com/presupuesto";
+const url = "http://192.168.37.222:3000/presupuesto";
 
 export const PresupuestoScreen = ({ navigation }) => {
   const [visibility, setVisibility] = useState(false);
   const [texto, setTexto] = useState("Listo");
   const [id, setId] = useState();
   const [Datos, setDatos] = useState();
+  const [loader, setLoader] = useState(true);
+
   const setear = () => {
     setTexto("Listo");
     if (visibility === true) {
@@ -42,14 +44,12 @@ export const PresupuestoScreen = ({ navigation }) => {
   const editar = (monto_inicial, descrip, nombre, id) => {
     setear();
     initialState.descrip = descrip;
-    initialState.monto_inicial = monto_inicial.toString();
     initialState.nombre = nombre;
     setInputs(initialState);
     setTexto("Actualizar");
     setId(id);
   };
   const initialState = {
-    monto_inicial: "",
     descrip: "",
     nombre: "",
   };
@@ -69,7 +69,7 @@ export const PresupuestoScreen = ({ navigation }) => {
     loading,
     data: presu,
     info,
-  } = useFetch("https://yourfinz.herokuapp.com/presupuesto", navigation);
+  } = useFetch("http://192.168.37.222:3000/presupuesto", navigation, setLoader);
 
   return (
     <View style={estilos.container}>
@@ -77,7 +77,9 @@ export const PresupuestoScreen = ({ navigation }) => {
       {loading ? (
         <Apploader />
       ) : (
-        <View style={{ width: "98%", height: "100%", top: StatusBar.length + 18 }}>
+        <View
+          style={{ width: "98%", height: "100%", top: StatusBar.length + 18 }}
+        >
           {info ? (
             <Animated.FlatList
               style={estilos.list}
@@ -142,6 +144,7 @@ export const PresupuestoScreen = ({ navigation }) => {
         handleSubmit={handleSubmit}
         texto={texto}
       ></Modal>
+      {loader ? <Apploader /> : null}
     </View>
   );
 };

@@ -12,11 +12,13 @@ import {
 import fetchTransaction from "../hooks/fetchTransactions";
 import { IconButton } from "react-native-paper";
 import { ListRegistros, ModalTransactions } from "../components";
+import { Apploader } from "../components/loader";
 
 const { width, height } = Dimensions.get("window");
 
 export const detallePresupuesto = ({ navigation }) => {
   const [visibility, setVisibility] = useState(false);
+  const [loader, setLoader] = useState(true);
 
   const id_presupuesto = navigation.getParam("_id");
 
@@ -34,7 +36,8 @@ export const detallePresupuesto = ({ navigation }) => {
     info,
   } = fetchTransaction(
     `http://192.168.37.222:3000/transacciones${id_presupuesto}`,
-    navigation
+    navigation,
+    setLoader
   );
   const totales = transacciones.slice(0, 3);
   const nuevo = transacciones.filter((item) => typeof item === "object");
@@ -42,9 +45,7 @@ export const detallePresupuesto = ({ navigation }) => {
     <View style={styles.container}>
       <StatusBar barStyle="light-content" />
       {loading ? (
-        <View>
-          <ActivityIndicator size="large" color="white" />
-        </View>
+        <Apploader />
       ) : (
         <View
           style={{ width: "98%", height: "90%", top: StatusBar.length + 18 }}
@@ -166,6 +167,7 @@ export const detallePresupuesto = ({ navigation }) => {
               </Text>
             </View>
           )}
+          {loader ? <Apploader /> : null}
         </View>
       )}
       <IconButton

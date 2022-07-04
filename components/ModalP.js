@@ -1,44 +1,51 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Dimensions,
   Modal,
   View,
   TextInput,
-  Text
+  Text,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { IconButton } from "react-native-paper";
 import { ButtonGradient } from "../styles";
 
-export default ({ visibility, setear, inputs, subscribe, handleSubmit, texto }) => {
-  
-
+export default ({
+  visibility,
+  setear,
+  inputs,
+  subscribe,
+  handleSubmit,
+  texto,
+}) => {
   return (
     <Modal animationType="slide" transparent={true} visible={visibility}>
-      <View style={styles.contenido}>
-        <KeyboardAwareScrollView>
-          <Text style={styles.subtitle}>Presupuesto</Text>
+      <View style={{ backgroundColor: "rgba(0,0,0,0.5)", height: "100%" }}>
+        <View
+          style={{
+            backgroundColor: "#47474F",
+            borderRadius: 10,
+            margin: 30,
+            height: 300,
+            alignItems: "center",
+          }}
+        >
           <TextInput
+            placeholderTextColor={"white"}
             value={inputs.nombre}
             onChangeText={subscribe("nombre")}
             style={styles.input}
             placeholder="Nombre"
           />
           <TextInput
+            placeholderTextColor={"white"}
             multiline={true}
             numberOfLines={4}
             value={inputs.descrip}
             onChangeText={subscribe("descrip")}
             style={styles.input2}
-            placeholder="Descripción"
-          />
-          <TextInput
-            value={inputs.monto_inicial}
-            onChangeText={subscribe("monto_inicial")}
-            style={styles.input}
-            placeholder="Valor"
-            keyboardType="numeric"
+            placeholder="Descripción..."
           />
           <ButtonGradient
             onPress={handleSubmit}
@@ -56,52 +63,45 @@ export default ({ visibility, setear, inputs, subscribe, handleSubmit, texto }) 
               },
               button: {
                 width: "100%",
-                height: 70,
+                height: 50,
                 borderRadius: 25,
                 padding: 10,
                 alignItems: "center",
                 justifyContent: "center",
               },
               text: {
-                fontSize: 20,
-                color: "red",
+                fontSize: 18,
+                color: "#C75256",
                 fontWeight: "bold",
+                opacity: 0.8,
               },
             }}
-            colores={["#fff", "#fff"]}
+            colores={["#393943", "#393943"]}
           />
-        </KeyboardAwareScrollView>
+        </View>
       </View>
     </Modal>
   );
 };
 
 const styles = StyleSheet.create({
-  subtitle: {
-    top: 70,
-    alignSelf: "center",
-    fontSize: 16,
-    color: "gray",
-  },
   input: {
-    top: 70,
     height: 50,
-    borderColor: "gray",
-    borderWidth: 1,
     width: "95%",
     margin: 10,
     padding: 10,
-    borderRadius: 13,
+    color: "white",
+    backgroundColor: "#393943",
+    borderRadius: 8,
   },
   input2: {
-    top: 70,
-    height: 100,
-    borderColor: "gray",
-    borderWidth: 1,
+    height: 80,
     width: "95%",
     margin: 10,
     padding: 10,
-    borderRadius: 13,
+    color: "white",
+    backgroundColor: "#393943",
+    borderRadius: 8,
   },
   header: {
     width: "100%",
@@ -110,10 +110,9 @@ const styles = StyleSheet.create({
   },
   contenido: {
     flex: 1,
-    width: "100%",
-    backgroundColor: "rgba(255,255,255,1)",
-    paddingHorizontal: 20,
-    paddingVertical: 20,
+    backgroundColor: "rgba(0,0,0,0.3)",
+    alignItems: "stretch",
+    justifyContent: "center",
   },
 
   btnSalir: {
@@ -123,19 +122,18 @@ const styles = StyleSheet.create({
   },
   container: {
     width: "90%",
-    marginTop: 100,
     alignSelf: "center",
   },
   button: {
     width: "100%",
-    height: 70,
+    height: 50,
     borderRadius: 25,
     padding: 10,
     alignItems: "center",
     justifyContent: "center",
   },
   text: {
-    fontSize: 20,
+    fontSize: 18,
     color: "white",
     fontWeight: "bold",
   },
