@@ -8,7 +8,7 @@ import {
   CardStyleInterpolators,
 } from "react-navigation-stack";
 
-import { PresupuestoScreen, detallePresupuesto } from "../screen";
+import { PresupuestoScreen, detallePresupuesto, detalleTrans } from "../screen";
 const config = {
   animation: "spring",
   config: {
@@ -30,6 +30,12 @@ const AppPresupuesto = createStackNavigator(
     },
     Detalle: {
       screen: detallePresupuesto,
+      navigationOptions: {
+        headerShown: false,
+      },
+    },
+    Transaction: {
+      screen: detalleTrans,
       navigationOptions: {
         headerShown: false,
       },

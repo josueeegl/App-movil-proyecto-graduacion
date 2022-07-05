@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { dominio } from "../config";
 
-export const onSubmit = async (url, image, values, setear, setLoader) => {
-  const ft = image.uri.split(".")[3];
+export default async (url, image, values, setear, setLoader) => {
+  
   const formData = new FormData();
   formData.append("presupuesto_id", values.presupuesto_id);
   formData.append("nombre", values.nombre);
@@ -12,15 +13,19 @@ export const onSubmit = async (url, image, values, setear, setLoader) => {
   formData.append("tipo", values.tipo);
   formData.append("tipo_pago", values.tipo_pago);
   formData.append("fecha", values.fecha.toString());
-  formData.append("imagen", {
-    uri: image.uri,
-    name: values.nombre + "." + ft,
-    type: image.type + "/jepg",
-  });
+  
+  if (Object.entries(image).length !== 0) {
+    const ft = image.uri.split(".")[3];
+    formData.append("imagen", {
+      uri: image.uri,
+      name: values.nombre + "." + ft,
+      type: image.type + "/jepg",
+    });
+  }
 
   AsyncStorage.getItem("token").then(async (x) => {
     setLoader(true);
-    await fetch("http://192.168.37.222:3000/transacciones", {
+    await fetch(`http://${dominio}:3000/transacciones`, {
       method: "POST",
       headers: {
         "Content-Type": "multipart/form-data",

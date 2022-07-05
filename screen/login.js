@@ -3,9 +3,8 @@ import { Text, TextInput, View, StyleSheet, Dimensions } from "react-native";
 const { width, height } = Dimensions.get("window");
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { SvgTop, ButtonGradient, ButtonReg, ButtonGoogle } from "../styles";
-import useForm from "../hooks/useForm";
-import { onSubmitLog } from "../hooks/fetchRegister";
-import { Apploader } from "../components/loader";
+import { onSubmitLog, useForm } from "../hooks";
+import { Apploader } from "../components";
 
 export const LoginScreen = ({ navigation }) => {
   const [loader, setLoader] = useState(false);

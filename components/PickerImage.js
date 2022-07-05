@@ -11,7 +11,7 @@ import { Camera } from "expo-camera";
 import * as ImagePicker from "expo-image-picker";
 import { IconButton } from "react-native-paper";
 
-export const PickerImage = ({ afterClick }) => {
+export default ({ afterClick }) => {
   const [image, setImage] = useState(null);
   const [data, setData] = useState(null);
 
@@ -41,7 +41,7 @@ export const PickerImage = ({ afterClick }) => {
     let result = await ImagePicker.launchCameraAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [4, 3],
+      aspect: [4, 2],
       quality: 1,
     });
     afterClick(result);

@@ -1,25 +1,17 @@
 import React, { useState } from "react";
 import {
   StyleSheet,
-  Dimensions,
   Modal,
   View,
   TextInput,
   Text,
   TouchableOpacity,
-  Image,
-  TouchableHighlight,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { IconButton } from "react-native-paper";
-import { ButtonGradient } from "../styles";
-import { ButtonGroup } from "../components/ButtonGrup";
-import { PickerCategory } from "../components/PickerCategoria";
-import { PickerPago } from "../components/PickerPago";
-import { PickerDate } from "../components/PickerDate";
-import { PickerImage } from "../components/PickerImage";
-import { Apploader } from "../components/loader";
-import { onSubmit } from "../hooks/fetchPostTrans";
+import { onSubmit } from "../hooks";
+import { dominio } from "../config";
+import { PickerCategory, PickerPago, PickerDate, PickerImage, ButtonGroup, Apploader } from "../components";
 
 export default ({ visibility, setVisibility, ID, setLoading }) => {
   const [selectedType, setSelectedType] = useState(1);
@@ -30,6 +22,7 @@ export default ({ visibility, setVisibility, ID, setLoading }) => {
   const [valor, setValor] = useState("");
   const [image, setImage] = useState({});
   const [loader, setLoader] = useState(false);
+  const [show, setShow] = useState(false);
 
   const setear = () => {
     if (visibility === true) {
@@ -55,7 +48,7 @@ export default ({ visibility, setVisibility, ID, setLoading }) => {
 
   const enviar = () => {
     onSubmit(
-      "http://192.168.37.222:3000/transacciones",
+      `http://${dominio}:3000/transacciones`,
       image,
       values,
       setear,

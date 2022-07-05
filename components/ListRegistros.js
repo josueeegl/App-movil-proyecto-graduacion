@@ -11,7 +11,7 @@ import {
 import { IconButton } from "react-native-paper";
 const { width } = Dimensions.get("window");
 
-export default ({ items, index, setLoading }) => {
+export default ({ items, navigation }) => {
   return (
     <View
       style={{
@@ -21,26 +21,26 @@ export default ({ items, index, setLoading }) => {
         padding: 10,
       }}
     >
-      <View style={{ flexDirection: "row" }}>
+      <TouchableOpacity
+        style={{ flexDirection: "row" }}
+        onPress={() => {
+          navigation.navigate("Transaction", { items: items });
+        }}
+      >
         <Image
           source={{ uri: items.imagen.secure_url }}
           style={{ width: 60, height: 60, borderRadius: 60 / 2 }}
         />
-        <TouchableOpacity
-          onPress={() => {
-            console.log(items._id);
-          }}
-          style={{ width: "80%", marginHorizontal: 20 }}
-        >
+        <View style={{ width: "80%", marginHorizontal: 20 }}>
           <Text style={styles.txtheaders}>{items.nombre}</Text>
           <Text style={{ color: "#D0D3D4", fontSize: 14, opacity: 0.5 }}>
             {items.tipo_pago}
           </Text>
-        </TouchableOpacity>
+        </View>
         <View>
           <Text
             style={{
-              color: items.tipo ==='Gasto' ? "#C75256" : "#66BA69",
+              color: items.tipo === "Gasto" ? "#C75256" : "#66BA69",
               fontSize: 16,
               position: "absolute",
               right: width - (width - 35),
@@ -50,7 +50,7 @@ export default ({ items, index, setLoading }) => {
             Q {items.valor}
           </Text>
         </View>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };

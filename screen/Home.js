@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Text, TextInput, View, StyleSheet, FlatList } from "react-native";
+import {View} from "react-native";
 import { styles } from "../styles";
-import { Apploader } from "../components/loader";
+import { Apploader } from "../components";
 
 export const HomeScreen = () => {
   const [loader, setLoader] = useState(true);

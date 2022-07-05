@@ -8,17 +8,18 @@ import {
 } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
-export const PickerDate = ({ setFecha }) => {
+export default ({ setFecha, tag, styl }) => {
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
   const [text, setText] = useState("");
   const [textFt, setTextFt] = useState(
-    new Date().getDate() +
-      " - " +
-      (new Date().getMonth() + 1) +
-      " - " +
-      new Date().getFullYear()
+    tag ||
+      new Date().getDate() +
+        " - " +
+        (new Date().getMonth() + 1) +
+        " - " +
+        new Date().getFullYear()
   );
 
   const showMode = (currentMode) => {
@@ -33,22 +34,29 @@ export const PickerDate = ({ setFecha }) => {
 
     let tempDate = new Date(currentDate);
     setText(tempDate);
-    setTextFt(
-      tempDate.getDate() +
-        " - " +
-        (tempDate.getMonth() + 1) +
-        " - " +
-        tempDate.getFullYear()
-    );
+    if (event.type !== "dismissed") {
+      setTextFt(
+        tempDate.getDate() +
+          " - " +
+          (tempDate.getMonth() + 1) +
+          " - " +
+          tempDate.getFullYear()
+      );
+    }
     setFecha(tempDate);
   };
 
   return (
     <View style={{ flex: 1, marginTop: 10 }}>
-      <Text style={{ fontSize: 14, color: "white", fontWeight: "bold" }}>
-        Fecha
-      </Text>
-      <TouchableOpacity onPress={() => showMode("date")} style={styles.pick}>
+      {tag ? null : (
+        <Text style={{ fontSize: 14, color: "white", fontWeight: "bold" }}>
+          Fecha
+        </Text>
+      )}
+      <TouchableOpacity
+        onPress={() => showMode("date")}
+        style={tag ? [styl.textInput, {marginTop: 10}] : styles.pick}
+      >
         <Text style={{ color: "white" }}>{textFt}</Text>
       </TouchableOpacity>
       {show && (

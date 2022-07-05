@@ -1,25 +1,19 @@
-import { setStatusBarBackgroundColor } from "expo-status-bar";
 import React, { useState } from "react";
 import {
   Text,
   View,
   StyleSheet,
   Dimensions,
-  FlatList,
   Animated,
-  ActivityIndicator,
   Image,
   StatusBar,
 } from "react-native";
 import { IconButton } from "react-native-paper";
-import { Modal, ListItem } from "../components";
-import useFetch from "../hooks/useFetch";
-import { onDelete } from "../hooks/fetchEliminar";
-import useForm from "../hooks/useForm";
-import { onSubmit } from "../hooks/fetchX";
-import { Apploader } from "../components/loader";
+import { Modal, ListItem, Apploader } from "../components";
+import { onDelete, useFetch, useForm, onSubmitX  } from "../hooks";
+import { dominio } from "../config";
 
-const url = "http://192.168.37.222:3000/presupuesto";
+const url = `http://${dominio}:3000/presupuesto`;
 
 export const PresupuestoScreen = ({ navigation }) => {
   const [visibility, setVisibility] = useState(false);
@@ -55,7 +49,7 @@ export const PresupuestoScreen = ({ navigation }) => {
   };
   const { subscribe, inputs, handleSubmit, setInputs } = useForm(
     initialState,
-    onSubmit,
+    onSubmitX,
     navigation,
     limpiar,
     url,
@@ -69,7 +63,7 @@ export const PresupuestoScreen = ({ navigation }) => {
     loading,
     data: presu,
     info,
-  } = useFetch("http://192.168.37.222:3000/presupuesto", navigation, setLoader);
+  } = useFetch(`http://${dominio}:3000/presupuesto`, navigation, setLoader);
 
   return (
     <View style={estilos.container}>

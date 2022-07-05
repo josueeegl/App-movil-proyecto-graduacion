@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const useFetch = (url, navigation, setLoader) => {
+export default(url, navigation, setLoader) => {
   const [loading, setLoading] = useState(true);
   const [info, setInfo] = useState(true);
   const [data, setData] = useState([]);
@@ -46,4 +46,3 @@ const useFetch = (url, navigation, setLoader) => {
   return { setLoading, loading, data, info };
 };
 
-export default useFetch;

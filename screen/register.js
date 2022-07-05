@@ -6,14 +6,11 @@ import {
   View,
   StyleSheet,
   Dimensions,
-  ActivityIndicator,
 } from "react-native";
 const { width, height } = Dimensions.get("window");
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { SvgTop, ButtonGradient, ButtonReg, ButtonGoogle } from "../styles";
-import useForm from "../hooks/useForm";
-import { onSubmitReg } from "../hooks/fetchRegister";
-import logGoogle from "../hooks/logGoogle";
+import { onSubmitReg, useForm, logGoogle } from "../hooks";
 import * as Google from "expo-auth-session/providers/google";
 import * as WebBrowser from "expo-web-browser";
 

@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 
-export const PickerPago = ({ setPago, visible, pago }) => {
-
-
+export default ({ setPago, visible, pago }) => {
   if (visible == 0) {
     return (
       <View style={{ flex: 1, marginTop: 10 }}>
@@ -16,7 +14,6 @@ export const PickerPago = ({ setPago, visible, pago }) => {
           selectedValue={pago}
           onValueChange={setPago}
         >
-          <Picker.Item label="Selecciona el tipo de pago" value="Unknown" />
           <Picker.Item label="Efectivo" value="Efectivo" />
           <Picker.Item
             label="Tarjeta de crédito o débito"

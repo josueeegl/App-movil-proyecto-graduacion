@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 
-export const PickerCategory = ({ buttons, selectedType, setCategory }) => {
+export default ({ buttons, selectedType, setCategory }) => {
   const [selectedCategory, setSelectedCategory] = useState("Unknown");
 
   const handleClick = (item, id) => {
@@ -32,6 +32,7 @@ export const PickerCategory = ({ buttons, selectedType, setCategory }) => {
           <Picker.Item label="Vacaciones" value="Vacaciones" />
           <Picker.Item label="Fiesta" value="Fiesta" />
           <Picker.Item label="Servicios" value="Servicios" />
+          <Picker.Item label="Otro" value="Otro" />
         </Picker>
       ) : (
         <Picker

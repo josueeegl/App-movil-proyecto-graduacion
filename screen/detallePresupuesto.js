@@ -9,10 +9,10 @@ import {
   Dimensions,
   Image,
 } from "react-native";
-import fetchTransaction from "../hooks/fetchTransactions";
+import { fetchTransaction } from "../hooks";
 import { IconButton } from "react-native-paper";
-import { ListRegistros, ModalTransactions } from "../components";
-import { Apploader } from "../components/loader";
+import { ListRegistros, ModalTransactions, Apploader } from "../components";
+import { dominio } from "../config";
 
 const { width, height } = Dimensions.get("window");
 
@@ -35,7 +35,7 @@ export const detallePresupuesto = ({ navigation }) => {
     data: transacciones,
     info,
   } = fetchTransaction(
-    `http://192.168.37.222:3000/transacciones${id_presupuesto}`,
+    `http://${dominio}:3000/transacciones${id_presupuesto}`,
     navigation,
     setLoader
   );
@@ -123,7 +123,7 @@ export const detallePresupuesto = ({ navigation }) => {
                 keyExtractor={(item, index) => index.toString()}
                 sections={nuevo.reverse()}
                 renderItem={({ item }) => (
-                  <ListRegistros items={item} setLoading={setLoading} />
+                  <ListRegistros items={item} navigation={navigation} />
                 )}
                 renderSectionHeader={({ section }) => (
                   <View style={{ paddingLeft: 20, marginBottom: 20 }}>

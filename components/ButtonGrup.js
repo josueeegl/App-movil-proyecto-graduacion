@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 
-export const ButtonGroup = ({ buttons, afterClick }) => {
+export default ({ buttons, afterClick }) => {
   const [clickedId, setClickedId] = useState(1);
   const handleClick = (item, id) => {
     setClickedId(id);

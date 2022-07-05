@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import LottieView from "lottie-react-native";
 
-export const Apploader = () => {
+export default () => {
   return (
     <View style={[StyleSheet.absoluteFillObject, styles.container]} >
       <LottieView source={require("../assets/loading.json")} autoPlay loop style={{width: 100, height: 100}} />
