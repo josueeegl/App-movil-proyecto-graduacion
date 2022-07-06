@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default(url, navigation, setLoader) => {
+export default (url, navigation, setLoader) => {
   const [loading, setLoading] = useState(true);
   const [info, setInfo] = useState(true);
   const [data, setData] = useState([]);
 
   const fetchData = () => {
-    AsyncStorage.getItem("token").then(async(x) => {
+    AsyncStorage.getItem("token").then(async (x) => {
       const response = await fetch(url, {
         method: "GET",
         headers: {
@@ -45,4 +45,3 @@ export default(url, navigation, setLoader) => {
 
   return { setLoading, loading, data, info };
 };
-

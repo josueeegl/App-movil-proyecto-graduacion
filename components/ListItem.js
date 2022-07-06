@@ -14,17 +14,15 @@ const ITEM_SIZE = 70 + 20 * 3;
 const { width } = Dimensions.get("window");
 
 export default ({
-  id,
-  nombre,
   onPress,
-  monto,
-  fecha,
-  descrip,
   editar,
   index,
   scrollY,
   onDelete,
+  setLoader,
+  navigation,
   setLoading,
+  item
 }) => {
   const inputRange = [-1, 0, ITEM_SIZE * index, ITEM_SIZE * (index + 2)];
   const OpactityinputRange = [
@@ -39,7 +37,6 @@ export default ({
     outputRange: [1, 1, 1, 0],
   });
   const opacity = scrollY.interpolate({
-    
     inputRange,
     outputRange: [1, 1, 1, 0],
   });
@@ -53,15 +50,22 @@ export default ({
       {
         text: "SI",
         onPress: () => {
-          console.log(id);
-          onDelete(id, "https://yourfinz.herokuapp.com/presupuesto", setLoading);
+          setLoader(true);
+          onDelete(
+            item._id,
+            "https://yourfinz.herokuapp.com/presupuesto",
+            navigation,
+            setLoader,
+            "Home",
+            setLoading
+          );
         },
       },
     ]);
   };
   const alterar = () => {
-    editar(monto, descrip, nombre, id);
-  }
+    editar(item._id,item.descrip, item.nombre);
+  };
   return (
     <Animated.View
       style={{
@@ -90,16 +94,7 @@ export default ({
               marginRight: 10,
             }}
           >
-            {nombre}
-          </Text>
-          <Text
-            style={{
-              fontSize: 18,
-              opacity: 0.7,
-              color: "#FFDB56",
-            }}
-          >
-            Q{monto}
+            {item.nombre}
           </Text>
           <Text
             style={{
@@ -109,7 +104,7 @@ export default ({
               marginTop: 5,
             }}
           >
-            {fecha.toString().split("T")[0]}
+            {item.fecha_inicial.toString().split("T")[0]}
           </Text>
         </TouchableOpacity>
 

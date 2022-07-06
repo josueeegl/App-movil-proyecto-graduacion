@@ -1,9 +1,10 @@
 export { default as onDelete } from "./fetchEliminar";
-export { default as onSubmit } from "./fetchPostTrans";
 export { onSubmitReg, onSubmitLog } from "./fetchRegister";
-export { fetchTransaction, fetchPutTransaction } from "./fetchTransactions";
 export { default as onSubmitX } from "./fetchX";
+export { default as fetchPut } from "./fetchPut";
+export { default as fetchPost } from "./fetchPost";
 export { default as logGoogle } from "./logGoogle";
-export { default as useFetch } from "./useFetch";
+export { default as fetchGet } from "./fetchGet";
 export { default as useForm } from "./useForm";
 export { formatear, formatearYear } from "./formatDate";
+export { formData } from "./formData";

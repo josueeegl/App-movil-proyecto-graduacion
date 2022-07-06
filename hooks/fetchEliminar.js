@@ -1,9 +1,7 @@
-import React from "react";
 import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default (values, url, navigation, setLoader) => {
-  console.log(url + values);
+export default (values, url, navigation, setLoader, pantalla, setLoading) => {
   AsyncStorage.getItem("token").then((x) => {
     if (x) {
       fetch(url + values, {
@@ -13,10 +11,13 @@ export default (values, url, navigation, setLoader) => {
         },
       }).then((x) => {
         if (x.status !== 204) {
+          setLoading(true);
+          setLoader(false);
           return Alert.alert("Error :(", "Hubo un problema al eliminarlo");
         }
+        setLoading(true);
         setLoader(false);
-        navigation.navigate("Detalle");
+        navigation.navigate(pantalla);
       });
     }
   });

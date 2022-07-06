@@ -10,12 +10,13 @@ import {
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { IconButton } from "react-native-paper";
-import { formatearYear, fetchPutTransaction, onDelete }from "../hooks";
+import { formatearYear, onDelete, fetchPut } from "../hooks";
 import { dominio } from "../config";
-import {  PickerDate, Apploader } from "../components";
+import { PickerDate, Apploader } from "../components";
 
 export const detalleTrans = ({ navigation }) => {
   const items = navigation.getParam("items");
+  const setLoading = navigation.getParam("setLoading");
   const [loader, setLoader] = useState(false);
   const [valor, setValor] = useState("");
   const [category, setCategory] = useState("");
@@ -153,10 +154,10 @@ export const detalleTrans = ({ navigation }) => {
                 date ? (data.fecha = date) : null;
 
                 if (Object.entries(data).length !== 0) {
-                  fetchPutTransaction(
+                  fetchPut(
                     `http://${dominio}:3000/transacciones${items._id}`,
                     data,
-                    navigation
+                    navigation, "Detalle"
                   );
                 } else {
                   Alert.alert("Modificación", "No haz realizado cambios");
@@ -169,7 +170,6 @@ export const detalleTrans = ({ navigation }) => {
               color="#EF5350"
               size={40}
               onPress={() => {
-                console.log(items._id);
                 Alert.alert("¿Quieres eliminarlo?", "", [
                   {
                     text: "NO",
@@ -183,7 +183,9 @@ export const detalleTrans = ({ navigation }) => {
                         items._id,
                         `http://${dominio}:3000/transacciones`,
                         navigation,
-                        setLoader
+                        setLoader,
+                        "Detalle",
+                        setLoading
                       );
                     },
                   },
@@ -223,8 +225,8 @@ const styles = StyleSheet.create({
     height: "68%",
     backgroundColor: "#47474F",
     transform: [{ translateY: 200 - 20 }],
-    borderTopLeftRadius: 32,
-    borderTopRightRadius: 32,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
     padding: 20,
     paddingTop: 10,
   },

@@ -1,7 +1,6 @@
 export { default as Modal } from "./ModalP";
 export { default as ListItem } from "./ListItem";
 export { default as ListRegistros } from "./ListRegistros";
-export { default as ModalTransactions } from "./ModalTransactions";
 export { default as PickerCategory } from "./PickerCategoria";
 export { default as PickerPago } from "./PickerPago";
 export { default as PickerDate } from "./PickerDate";

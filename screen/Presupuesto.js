@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { IconButton } from "react-native-paper";
 import { Modal, ListItem, Apploader } from "../components";
-import { onDelete, useFetch, useForm, onSubmitX  } from "../hooks";
+import { onDelete, useForm, onSubmitX, fetchGet } from "../hooks";
 import { dominio } from "../config";
 
 const url = `http://${dominio}:3000/presupuesto`;
@@ -19,7 +19,7 @@ export const PresupuestoScreen = ({ navigation }) => {
   const [visibility, setVisibility] = useState(false);
   const [texto, setTexto] = useState("Listo");
   const [id, setId] = useState();
-  const [Datos, setDatos] = useState();
+  const [presupuesto, setPresupuesto] = useState();
   const [loader, setLoader] = useState(true);
 
   const setear = () => {
@@ -35,7 +35,7 @@ export const PresupuestoScreen = ({ navigation }) => {
     setInputs("");
     setLoading(true);
   };
-  const editar = (monto_inicial, descrip, nombre, id) => {
+  const editar = (id, descrip, nombre) => {
     setear();
     initialState.descrip = descrip;
     initialState.nombre = nombre;
@@ -63,7 +63,7 @@ export const PresupuestoScreen = ({ navigation }) => {
     loading,
     data: presu,
     info,
-  } = useFetch(`http://${dominio}:3000/presupuesto`, navigation, setLoader);
+  } = fetchGet(`http://${dominio}:3000/presupuesto`, navigation, setLoader);
 
   return (
     <View style={estilos.container}>
@@ -88,16 +88,14 @@ export const PresupuestoScreen = ({ navigation }) => {
                   onPress={() =>
                     navigation.navigate("Detalle", { _id: item._id })
                   }
-                  descrip={item.descrip}
                   editar={editar}
-                  nombre={item.nombre}
-                  monto={item.monto_inicial}
-                  fecha={item.fecha_inicial}
                   index={index}
                   scrollY={scrollY}
-                  id={item._id}
                   onDelete={onDelete}
+                  setLoader={setLoader}
+                  navigation={navigation}
                   setLoading={setLoading}
+                  item={item}
                 />
               )}
             />

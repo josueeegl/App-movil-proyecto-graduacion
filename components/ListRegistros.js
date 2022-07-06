@@ -11,7 +11,7 @@ import {
 import { IconButton } from "react-native-paper";
 const { width } = Dimensions.get("window");
 
-export default ({ items, navigation }) => {
+export default ({ items, navigation, setLoading }) => {
   return (
     <View
       style={{
@@ -24,7 +24,7 @@ export default ({ items, navigation }) => {
       <TouchableOpacity
         style={{ flexDirection: "row" }}
         onPress={() => {
-          navigation.navigate("Transaction", { items: items });
+          navigation.navigate("Transaction", { items: items, setLoading: setLoading });
         }}
       >
         <Image

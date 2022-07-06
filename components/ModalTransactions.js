@@ -9,11 +9,23 @@ import {
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { IconButton } from "react-native-paper";
-import { onSubmit } from "../hooks";
+import { fetchPost, formData } from "../hooks";
 import { dominio } from "../config";
-import { PickerCategory, PickerPago, PickerDate, PickerImage, ButtonGroup, Apploader } from "../components";
+import {
+  PickerCategory,
+  PickerPago,
+  PickerDate,
+  PickerImage,
+  ButtonGroup,
+  Apploader,
+} from "./";
 
-export default ({ visibility, setVisibility, ID, setLoading }) => {
+export const ModalTransactions = ({
+  visibility,
+  setVisibility,
+  ID,
+  setLoading,
+}) => {
   const [selectedType, setSelectedType] = useState(1);
   const [category, setCategory] = useState();
   const [pago, setPago] = useState();
@@ -22,7 +34,6 @@ export default ({ visibility, setVisibility, ID, setLoading }) => {
   const [valor, setValor] = useState("");
   const [image, setImage] = useState({});
   const [loader, setLoader] = useState(false);
-  const [show, setShow] = useState(false);
 
   const setear = () => {
     if (visibility === true) {
@@ -47,12 +58,14 @@ export default ({ visibility, setVisibility, ID, setLoading }) => {
   };
 
   const enviar = () => {
-    onSubmit(
+    const data = formData(values, image);
+    fetchPost(
       `http://${dominio}:3000/transacciones`,
-      image,
-      values,
+      data,
       setear,
-      setLoader
+      setLoader,
+      "multipart/form-data",
+      setLoading
     );
   };
 
