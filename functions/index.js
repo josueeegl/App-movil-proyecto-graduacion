@@ -1,0 +1,1 @@
+export { clickDelete } from "./clickDelete";

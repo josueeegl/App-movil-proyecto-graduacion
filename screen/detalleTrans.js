@@ -12,7 +12,8 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { IconButton } from "react-native-paper";
 import { formatearYear, onDelete, fetchPut } from "../hooks";
 import { dominio } from "../config";
-import { PickerDate, Apploader } from "../components";
+import { PickerDate, Apploader, ButtonsOptions } from "../components";
+import { clickDelete } from "../functions";
 
 export const detalleTrans = ({ navigation }) => {
   const items = navigation.getParam("items");
@@ -29,6 +30,25 @@ export const detalleTrans = ({ navigation }) => {
   const d = `${fechayhora[2]} de ${formatearYear(fechayhora[1])} del ${
     fechayhora[3]
   }`;
+
+  const modificar = () => {
+    category.length !== 0 ? (data.nombre = category) : null;
+    descripcion.length !== 0 ? (data.descrip = descripcion) : null;
+    valor.length !== 0 ? (data.valor = valor) : null;
+    tipoPago.length !== 0 ? (data.tipo_pago = tipoPago) : null;
+    date ? (data.fecha = date) : null;
+
+    if (Object.entries(data).length !== 0) {
+      fetchPut(
+        `http://${dominio}:3000/transacciones${items._id}`,
+        data,
+        navigation,
+        "Detalle"
+      );
+    } else {
+      Alert.alert("Modificación", "No haz realizado cambios");
+    }
+  };
   return (
     <View style={styles.container}>
       <View
@@ -128,71 +148,27 @@ export const detalleTrans = ({ navigation }) => {
             cambios haz clic en el lápiz.
             <IconButton icon="square-edit-outline" color="white" size={10} />
           </Text>
-          <View
-            style={{
-              flex: 1,
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginTop: 30,
-            }}
-          >
-            <IconButton
-              icon="arrow-left"
-              color="#4F93BC"
-              size={40}
-              onPress={() => navigation.navigate("Detalle")}
-            />
-            <IconButton
-              icon="square-edit-outline"
-              color="white"
-              size={40}
-              onPress={() => {
-                category.length !== 0 ? (data.nombre = category) : null;
-                descripcion.length !== 0 ? (data.descrip = descripcion) : null;
-                valor.length !== 0 ? (data.valor = valor) : null;
-                tipoPago.length !== 0 ? (data.tipo_pago = tipoPago) : null;
-                date ? (data.fecha = date) : null;
 
-                if (Object.entries(data).length !== 0) {
-                  fetchPut(
-                    `http://${dominio}:3000/transacciones${items._id}`,
-                    data,
-                    navigation, "Detalle"
-                  );
-                } else {
-                  Alert.alert("Modificación", "No haz realizado cambios");
-                }
-              }}
-            />
-
-            <IconButton
-              icon="delete"
-              color="#EF5350"
-              size={40}
-              onPress={() => {
-                Alert.alert("¿Quieres eliminarlo?", "", [
-                  {
-                    text: "NO",
-                    style: "cancel",
-                  },
-                  {
-                    text: "SI",
-                    onPress: () => {
-                      setLoader(true);
-                      onDelete(
-                        items._id,
-                        `http://${dominio}:3000/transacciones`,
-                        navigation,
-                        setLoader,
-                        "Detalle",
-                        setLoading
-                      );
-                    },
-                  },
-                ]);
-              }}
-            />
-          </View>
+          <ButtonsOptions
+            fDelete={() =>
+              clickDelete(
+                setLoader,
+                onDelete,
+                items._id,
+                `http://${dominio}:3000/transacciones`,
+                navigation,
+                "Detalle",
+                setLoading
+              )
+            }
+            fModificar={modificar}
+            styleButtons={null}
+            colorEdit={"white"}
+            fAtras={() => navigation.navigate("Detalle")}
+            nameIcon={"arrow-left"}
+            size={40}
+            styleView={styles.styleView}
+          />
         </KeyboardAwareScrollView>
       </View>
       {loader ? <Apploader /> : null}
@@ -235,5 +211,11 @@ const styles = StyleSheet.create({
     height: 200,
     position: "absolute",
     alignSelf: "center",
+  },
+  styleView: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 30,
   },
 });

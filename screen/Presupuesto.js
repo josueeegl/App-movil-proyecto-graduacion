@@ -4,7 +4,7 @@ import {
   View,
   StyleSheet,
   Dimensions,
-  Animated,
+  FlatList,
   Image,
   StatusBar,
 } from "react-native";
@@ -19,7 +19,6 @@ export const PresupuestoScreen = ({ navigation }) => {
   const [visibility, setVisibility] = useState(false);
   const [texto, setTexto] = useState("Listo");
   const [id, setId] = useState();
-  const [presupuesto, setPresupuesto] = useState();
   const [loader, setLoader] = useState(true);
 
   const setear = () => {
@@ -56,14 +55,13 @@ export const PresupuestoScreen = ({ navigation }) => {
     texto,
     id
   );
-  const scrollY = React.useRef(new Animated.Value(0)).current;
 
   const {
     setLoading,
     loading,
     data: presu,
     info,
-  } = fetchGet(`http://${dominio}:3000/presupuesto`, navigation, setLoader);
+  } = fetchGet(url, navigation, setLoader);
 
   return (
     <View style={estilos.container}>
@@ -75,13 +73,9 @@ export const PresupuestoScreen = ({ navigation }) => {
           style={{ width: "98%", height: "100%", top: StatusBar.length + 18 }}
         >
           {info ? (
-            <Animated.FlatList
+            <FlatList
               style={estilos.list}
               data={presu}
-              onScroll={Animated.event(
-                [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-                { useNativeDriver: true }
-              )}
               keyExtractor={(x) => x._id}
               renderItem={({ item, index }) => (
                 <ListItem
@@ -89,8 +83,6 @@ export const PresupuestoScreen = ({ navigation }) => {
                     navigation.navigate("Detalle", { _id: item._id })
                   }
                   editar={editar}
-                  index={index}
-                  scrollY={scrollY}
                   onDelete={onDelete}
                   setLoader={setLoader}
                   navigation={navigation}

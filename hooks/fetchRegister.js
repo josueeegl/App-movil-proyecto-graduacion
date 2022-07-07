@@ -1,10 +1,11 @@
 import React from "react";
 import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { dominio } from "../config";
 
 export const onSubmitReg = (values, navigation, funcion) => {
   fetch(
-    `https://yourfinz.herokuapp.com/user/register/?nombre=${values.nombre}&email=${values.email}&password=${values.password}`,
+    `http://${dominio}:3000/user/register/?nombre=${values.nombre}&email=${values.email}&password=${values.password}`,
     {
       method: "POST",
     }
@@ -26,8 +27,8 @@ export const onSubmitReg = (values, navigation, funcion) => {
 export const onSubmitLog = (values, navigation, setLoader) => {
   setLoader(true);
   fetch(
-    `https://yourfinz.herokuapp.com/user/login/?email=${values.email}&password=${values.password}`,
-    {
+    `http://${dominio}:3000/user/login/?email=${values.email}&password=${values.password}`,
+    { 
       method: "POST",
     }
   )
@@ -42,6 +43,7 @@ export const onSubmitLog = (values, navigation, setLoader) => {
     .then((x) => {
       setLoader(false);
       AsyncStorage.setItem("token", x.token);
+      AsyncStorage.setItem("email", values.email);
       navigation.navigate("Root");
     })
     .catch((e) => {

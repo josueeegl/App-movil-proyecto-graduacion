@@ -49,82 +49,106 @@ export const detallePresupuesto = ({ navigation }) => {
         <Apploader />
       ) : (
         <View
-          style={{ width: "98%", height: "90%", top: StatusBar.length + 18 }}
+          style={{ width: "100%", height: "100%", top: StatusBar.length }}
         >
           {info ? (
             <>
               <View
                 style={{
-                  alignSelf: "center",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  width: "50%",
-                  borderWidth: 1,
-                  borderRadius: 8,
-                  borderColor: "rgba(208, 211, 212, 0.1) ",
-                  marginBottom: 10,
+                  backgroundColor: "rgba(255,255,255,0.1)",
+                  marginBottom: 30,
+                  borderBottomRightRadius: 40,
+                    borderBottomLeftRadius: 40,
+                    padding: 15,
+                    paddingTop: 30,
+                  
                 }}
               >
-                <Text style={styles.txtheaders}>Balance</Text>
-                <Text
+                <View
                   style={{
-                    marginTop: 5,
-                    color: totales[2] < 0 ? "#C75256" : "#66BA69",
-                    fontWeight: "bold",
-                    fontSize: 14,
+                    alignSelf: "center",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "70%",
+                    borderWidth: 1,
+                    borderRadius: 8,
+                    borderColor:
+                      totales[2] < 0
+                        ? "rgba(199, 82, 86, 0.5)"
+                        : "rgba(102, 186, 105, 0.5)",
+                    marginBottom: 5,
                   }}
                 >
-                  Q {totales[2]}
-                </Text>
-              </View>
-              <View
-                style={{
-                  alignSelf: "center",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  flexDirection: "row",
-                  width: "90%",
-                  borderBottomWidth: 1,
-                  borderBottomColor: "white",
-                  marginBottom: 30,
-                }}
-              >
-                <View style={styles.viewContentRow}>
-                  <View style={styles.viewRow}>
-                    <IconButton icon="layers-plus" color="#D0D3D4" size={25} />
-                    <Text style={styles.txtheaders}>Ingresos</Text>
-                  </View>
+                  <Text style={styles.txtheaders}>BALANCE</Text>
                   <Text
                     style={{
-                      color: "#66BA69",
+                      marginTop: 2,
+                      color: totales[2] < 0 ? "#C75256" : "#66BA69",
                       fontWeight: "bold",
-                      fontSize: 14,
+                      fontSize: 22,
                     }}
                   >
-                    Q {totales[0]}
+                    Q {totales[2]}
                   </Text>
                 </View>
-                <View style={styles.viewContentRow}>
-                  <View style={styles.viewRow}>
-                    <IconButton icon="layers-minus" color="#D0D3D4" size={25} />
-                    <Text style={styles.txtheaders}>Gastos</Text>
+                <View
+                  style={{
+                    alignSelf: "center",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexDirection: "row",
+                    width: "90%",
+                  }}
+                >
+                  <View style={styles.viewContentRow}>
+                    <View style={styles.viewRow}>
+                      <IconButton
+                        icon="arrow-up-bold-circle-outline"
+                        color="rgba(102, 186, 105,0.8)"
+                        size={20}
+                      />
+                      <Text style={styles.txtheaders}>INGRESOS</Text>
+                    </View>
+                    <Text
+                      style={{
+                        color: "#66BA69",
+                        fontWeight: "bold",
+                        fontSize: 20,
+                      }}
+                    >
+                      Q {totales[0]}
+                    </Text>
                   </View>
-                  <Text
-                    style={{
-                      color: "#C75256",
-                      fontWeight: "bold",
-                      fontSize: 14,
-                    }}
-                  >
-                    Q {totales[1]}
-                  </Text>
+                  <View style={styles.viewContentRow}>
+                    <View style={styles.viewRow}>
+                      <IconButton
+                        icon="arrow-down-bold-circle-outline"
+                        color="rgba(199, 82, 86, 0.8)"
+                        size={20}
+                      />
+                      <Text style={styles.txtheaders}>GASTOS</Text>
+                    </View>
+                    <Text
+                      style={{
+                        color: "#C75256",
+                        fontWeight: "bold",
+                        fontSize: 20,
+                      }}
+                    >
+                      Q {totales[1]}
+                    </Text>
+                  </View>
                 </View>
               </View>
               <SectionList
                 keyExtractor={(item, index) => index.toString()}
                 sections={nuevo.reverse()}
                 renderItem={({ item }) => (
-                  <ListRegistros items={item} navigation={navigation} setLoading={setLoading} />
+                  <ListRegistros
+                    items={item}
+                    navigation={navigation}
+                    setLoading={setLoading}
+                  />
                 )}
                 renderSectionHeader={({ section }) => (
                   <View style={{ paddingLeft: 20, marginBottom: 20 }}>
@@ -206,16 +230,16 @@ const styles = StyleSheet.create({
     right: -12,
   },
   txtheaders: {
-    color: "#D0D3D4",
+    fontSize: 10,
     letterSpacing: 2,
-    fontWeight: "bold",
-    fontSize: 16,
+    color: "white",
+    fontWeight: "500",
+    opacity: 0.7,
   },
   viewContentRow: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 10,
     marginHorizontal: 10,
   },
   viewRow: {
