@@ -1,4 +1,5 @@
 export { default as Modal } from "./ModalP";
+export { default as ModalPutUser } from "./modalPutUser";
 export { default as ListItem } from "./ListItem";
 export { default as ListRegistros } from "./ListRegistros";
 export { default as PickerCategory } from "./PickerCategoria";

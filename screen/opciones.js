@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Text,
   TextInput,
@@ -6,38 +6,22 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Apploader } from "../components";
-import { clickDelete } from "../functions";
-import { dominio } from "../config";
-import { onDelete } from "../hooks";
+import { Apploader, ModalPutUser } from "../components";
+import { ObtenerUser } from "../hooks";
 
 export const OPScreen = ({ navigation }) => {
+  const [visibility, setVisibility] = useState(false);
   const [loader, setLoader] = useState(true);
-  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [nombre, setNombre] = useState("");
   const [id, setId] = useState("");
+  const [data, setData] = useState();
 
-  AsyncStorage.getItem("email").then((item) => {
-    setEmail(item);
-    AsyncStorage.getItem("token").then(async (x) => {
-      const response = await fetch(`http://${dominio}:3000/user${email}`, {
-        method: "GET",
-        headers: {
-          authorization: x,
-        },
-      });
-      if (response.status == 200) {
-        const data = await response.json();
-        setLoader(false);
-        setNombre(data[0].nombre);
-        setId(data[0]._id);
-      }
-    });
-  });
+  ObtenerUser(setLoader, setData, setId, navigation);
 
   return (
     <KeyboardAwareScrollView style={styles.container}>
@@ -53,16 +37,22 @@ export const OPScreen = ({ navigation }) => {
         <Text style={styles.tag}>NOMBRE</Text>
         <TextInput
           placeholderTextColor={"white"}
-          placeholder={nombre.toUpperCase()}
+          placeholder={
+            typeof data === "object" ? data[0].nombre.toUpperCase() : ""
+          }
           style={styles.tagInput}
+          value={nombre}
+          onChangeText={setNombre}
         />
       </View>
       <View style={styles.viewTag}>
         <Text style={styles.tag}>CORREO ELECTRÓNICO</Text>
         <TextInput
           placeholderTextColor={"white"}
-          placeholder={email}
+          placeholder={typeof data === "object" ? data[0].email : ""}
           style={styles.tagInput}
+          value={email}
+          onChangeText={setEmail}
         />
       </View>
       <View style={styles.viewButtons}>
@@ -92,15 +82,16 @@ export const OPScreen = ({ navigation }) => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => clickDelete(
-            setLoader,
-            onDelete,
-            id,
-            `http://${dominio}:3000/user`,
-            navigation,
-            "OnBoarding",
-            setLoading
-          )}
+          onPress={() => {
+            if (email !== "" || nombre !== "") {
+              setVisibility(true);
+            } else {
+              Alert.alert(
+                "No has realizado cambios",
+                "Para modificar un elemento solo presiona en el"
+              );
+            }
+          }}
           style={{
             padding: 10,
             borderRadius: 10,
@@ -117,10 +108,19 @@ export const OPScreen = ({ navigation }) => {
               opacity: 0.9,
             }}
           >
-            ELIMINAR CUENTA
+            ACTUALIZAR DATOS
           </Text>
         </TouchableOpacity>
       </View>
+      <ModalPutUser
+        visibility={visibility}
+        setVisibility={setVisibility}
+        setNombre={setNombre}
+        setEmail={setEmail}
+        email={email}
+        nombre={nombre}
+        id={id}
+      />
       {loader ? <Apploader /> : null}
     </KeyboardAwareScrollView>
   );
