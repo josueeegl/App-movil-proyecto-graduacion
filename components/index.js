@@ -8,4 +8,5 @@ export { default as PickerDate } from "./PickerDate";
 export { default as PickerImage } from "./PickerImage";
 export { default as ButtonGroup } from "./ButtonGrup";
 export { default as Apploader } from "./loader";
+export { default as HeaderTransactions } from "./HeadersTransactions";
 export { ButtonsOptions } from "./buttonsOptions";

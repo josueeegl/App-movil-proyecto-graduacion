@@ -4,14 +4,13 @@ import {
   View,
   StyleSheet,
   SectionList,
-  ActivityIndicator,
   StatusBar,
   Dimensions,
   Image,
 } from "react-native";
 import { fetchGet } from "../hooks";
 import { IconButton } from "react-native-paper";
-import { ListRegistros, Apploader } from "../components";
+import { ListRegistros, Apploader, HeaderTransactions } from "../components";
 import { ModalTransactions } from "../components/ModalTransactions";
 import { dominio } from "../config";
 
@@ -53,93 +52,7 @@ export const detallePresupuesto = ({ navigation }) => {
         >
           {info ? (
             <>
-              <View
-                style={{
-                  backgroundColor: "rgba(255,255,255,0.1)",
-                  marginBottom: 30,
-                  borderBottomRightRadius: 40,
-                    borderBottomLeftRadius: 40,
-                    padding: 15,
-                    paddingTop: 30,
-                  
-                }}
-              >
-                <View
-                  style={{
-                    alignSelf: "center",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    width: "70%",
-                    borderWidth: 1,
-                    borderRadius: 8,
-                    borderColor:
-                      totales[2] < 0
-                        ? "rgba(199, 82, 86, 0.5)"
-                        : "rgba(102, 186, 105, 0.5)",
-                    marginBottom: 5,
-                  }}
-                >
-                  <Text style={styles.txtheaders}>BALANCE</Text>
-                  <Text
-                    style={{
-                      marginTop: 2,
-                      color: totales[2] < 0 ? "#C75256" : "#66BA69",
-                      fontWeight: "bold",
-                      fontSize: 22,
-                    }}
-                  >
-                    Q {totales[2]}
-                  </Text>
-                </View>
-                <View
-                  style={{
-                    alignSelf: "center",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexDirection: "row",
-                    width: "90%",
-                  }}
-                >
-                  <View style={styles.viewContentRow}>
-                    <View style={styles.viewRow}>
-                      <IconButton
-                        icon="arrow-up-bold-circle-outline"
-                        color="rgba(102, 186, 105,0.8)"
-                        size={20}
-                      />
-                      <Text style={styles.txtheaders}>INGRESOS</Text>
-                    </View>
-                    <Text
-                      style={{
-                        color: "#66BA69",
-                        fontWeight: "bold",
-                        fontSize: 20,
-                      }}
-                    >
-                      Q {totales[0]}
-                    </Text>
-                  </View>
-                  <View style={styles.viewContentRow}>
-                    <View style={styles.viewRow}>
-                      <IconButton
-                        icon="arrow-down-bold-circle-outline"
-                        color="rgba(199, 82, 86, 0.8)"
-                        size={20}
-                      />
-                      <Text style={styles.txtheaders}>GASTOS</Text>
-                    </View>
-                    <Text
-                      style={{
-                        color: "#C75256",
-                        fontWeight: "bold",
-                        fontSize: 20,
-                      }}
-                    >
-                      Q {totales[1]}
-                    </Text>
-                  </View>
-                </View>
-              </View>
+              <HeaderTransactions totales={totales} />
               <SectionList
                 keyExtractor={(item, index) => index.toString()}
                 sections={nuevo.reverse()}
@@ -228,22 +141,5 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: height - 80,
     right: -12,
-  },
-  txtheaders: {
-    fontSize: 10,
-    letterSpacing: 2,
-    color: "white",
-    fontWeight: "500",
-    opacity: 0.7,
-  },
-  viewContentRow: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    marginHorizontal: 10,
-  },
-  viewRow: {
-    alignItems: "center",
-    flexDirection: "row",
   },
 });

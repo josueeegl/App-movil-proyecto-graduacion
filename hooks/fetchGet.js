@@ -9,28 +9,34 @@ export default (url, navigation, setLoader) => {
 
   const fetchData = () => {
     AsyncStorage.getItem("token").then(async (x) => {
-      const response = await fetch(url, {
+      fetch(url, {
         method: "GET",
         headers: {
           authorization: x,
         },
-      });
-      if (response.status == 200) {
-        const data = await response.json();
-        setData(data);
-        setLoading(false);
-        setLoader(false);
-        if (data.length === 0) {
-          data.forEach((z) => {
-            console.log(z);
-          })
-          setInfo(false);
-        } else {
-          setInfo(true);
-        }
-      } else {
-        Alert.alert("Error");
-      }
+      })
+        .then(async (x) => {
+          if (x.status == 200) {
+            const data = await x.json();
+            setData(data);
+            setLoading(false);
+            setLoader(false);
+            if (data.length === 0) {
+              data.forEach((z) => {
+                console.log(z);
+              });
+              setInfo(false);
+            } else {
+              setInfo(true);
+            }
+          }
+        })
+        .catch((e) => {
+          return Alert.alert(
+            "Error",
+            "Hubo un error, verifica la red e intenta de nuevo."
+          );
+        });
     });
   };
 
