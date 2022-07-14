@@ -21,6 +21,9 @@ export const AppNavegador = createBottomTabNavigator(
     },
     Dinero: {
       screen: AppDinero,
+      navigationOptions: {
+        title: "Dinero",
+      },
     },
     Opciones: {
       screen: AppOpc,

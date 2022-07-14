@@ -1,13 +1,25 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, StatusBar, Image } from "react-native";
-import { Apploader, HeaderTransactions } from "../components";
+import {
+  View,
+  Text,
+  StyleSheet,
+  StatusBar,
+  Image,
+  FlatList,
+  TextInput,
+} from "react-native";
+import { Apploader, ListDinero } from "../components";
 import { fetchGet } from "../hooks";
 import { dominio } from "../config";
+import setDayWithOptions from "date-fns/esm/fp/setDayWithOptions/index.js";
 
-const url = `http://${dominio}:3000/transacciones`;
+const url = `http://${dominio}:3000/transacciones/detalle`;
 
 export const DineroScreen = ({ navigation }) => {
   const [loader, setLoader] = useState(true);
+  const [filter, setFilter] = useState([]);
+  const [datos, setDatos] = useState([]);
+  const [search, setSearch] = useState("");
 
   const {
     setLoading,
@@ -15,8 +27,23 @@ export const DineroScreen = ({ navigation }) => {
     data: transacciones,
     info,
   } = fetchGet(url, navigation, setLoader);
-  const totales = transacciones.slice(0, 3);
-  const nuevo = transacciones.filter((item) => typeof item === "object");
+
+  const searchFilter = (text) => {
+    setSearch(text);
+    setDatos(transacciones);
+    if (text !== "") {
+      const newData = datos.filter(
+        (x) =>
+          x.nombre.toUpperCase().indexOf(text.toUpperCase()) > -1 ||
+          x.descrip.toUpperCase().indexOf(text.toUpperCase()) > -1 ||
+          x.valor.toString().toUpperCase().indexOf(text.toUpperCase()) > -1
+      );
+      setFilter(newData);
+    } else {
+      setFilter([]);
+    }
+  };
+
   return (
     <View style={styles.container}>
       {loading ? (
@@ -24,7 +51,39 @@ export const DineroScreen = ({ navigation }) => {
       ) : (
         <View style={{ width: "100%", height: "100%", top: StatusBar.length }}>
           {info ? (
-            <HeaderTransactions totales={totales} />
+            <>
+              <TextInput
+                style={{
+                  top: 20,
+                  marginBottom: 30,
+                  height: 50,
+                  width: "90%",
+                  fontSize: 14,
+                  color: "white",
+                  alignSelf: "center",
+                  padding: 10,
+                  borderRadius: 15,
+                  backgroundColor: "rgba(255,255,255,0.2)",
+                }}
+                value={search}
+                placeholder="Buscar"
+                placeholderTextColor={"white"}
+                underlineColorAndroid="transparent"
+                onChangeText={(text) => searchFilter(text)}
+              />
+              <FlatList
+                style={{ marginBottom: 70 }}
+                data={filter.length === 0 ? transacciones : filter}
+                keyExtractor={(x) => x._id}
+                renderItem={({ item, index }) => (
+                  <ListDinero
+                    items={item}
+                    navigation={navigation}
+                    setLoading={setLoading}
+                  />
+                )}
+              />
+            </>
           ) : (
             <View
               style={{

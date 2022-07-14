@@ -7,3 +7,4 @@ export { LoginScreen } from "./login";
 export { RegisterScreen } from "./register";
 export { AuthLoading } from "./AuthLoading";
 export { detalleTrans } from "./detalleTrans";
+export { DetalleDinero } from "./detalleDinero";

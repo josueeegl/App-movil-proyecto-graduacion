@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, StatusBar, Image } from "react-native";
+import { View, Text, StyleSheet, StatusBar, Image, Dimensions } from "react-native";
 import { Apploader, HeaderTransactions } from "../components";
 import { fetchGet } from "../hooks";
 import { dominio } from "../config";

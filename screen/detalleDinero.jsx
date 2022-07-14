@@ -10,6 +10,6 @@ import {
 } from "react-native";
 import { DetailTransactions } from "../components/detailTransactions";
 
-export const detalleTrans = ({ navigation }) => {
-  return <DetailTransactions navigation={navigation} pantalla={"Detalle"} />;
+export const DetalleDinero = ({ navigation }) => {
+  return <DetailTransactions navigation={navigation} pantalla={"Home"} />;
 };

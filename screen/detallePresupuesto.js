@@ -47,15 +47,14 @@ export const detallePresupuesto = ({ navigation }) => {
       {loading ? (
         <Apploader />
       ) : (
-        <View
-          style={{ width: "100%", height: "100%", top: StatusBar.length }}
-        >
+        <View style={{ width: "100%", height: "100%", top: StatusBar.length }}>
           {info ? (
             <>
               <HeaderTransactions totales={totales} />
               <SectionList
+                style={{ marginBottom: 60 }}
                 keyExtractor={(item, index) => index.toString()}
-                sections={nuevo.reverse()}
+                sections={nuevo}
                 renderItem={({ item }) => (
                   <ListRegistros
                     items={item}
