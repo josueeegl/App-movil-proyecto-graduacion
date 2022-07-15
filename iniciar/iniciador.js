@@ -18,15 +18,21 @@ export const AppNavegador = createBottomTabNavigator(
     },
     Presupuesto: {
       screen: AppPresupuesto,
+      navigationOptions: {
+        title: "Presu...",
+      },
     },
     Dinero: {
       screen: AppDinero,
       navigationOptions: {
-        title: "Dinero",
+        title: "Historial",
       },
     },
     Opciones: {
       screen: AppOpc,
+      navigationOptions: {
+        title: "Opciones",
+      },
     },
   },
   {

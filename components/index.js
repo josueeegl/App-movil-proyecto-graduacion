@@ -10,4 +10,7 @@ export { default as ButtonGroup } from "./ButtonGrup";
 export { default as Apploader } from "./loader";
 export { default as HeaderTransactions } from "./HeadersTransactions";
 export { default as ListDinero } from "./listDinero";
+export { default as PieChartGX } from "./PieChart";
+export { default as BarChartGX } from "./BarChart";
+export { default as PickerFilter } from "./PickerFilter";
 export { ButtonsOptions } from "./buttonsOptions";

@@ -20,6 +20,7 @@ export const PresupuestoScreen = ({ navigation }) => {
   const [texto, setTexto] = useState("Listo");
   const [id, setId] = useState();
   const [loader, setLoader] = useState(true);
+  const [data, setData] = useState([]);
 
   const setear = () => {
     setTexto("Listo");
@@ -59,9 +60,8 @@ export const PresupuestoScreen = ({ navigation }) => {
   const {
     setLoading,
     loading,
-    data: presu,
     info,
-  } = fetchGet(url, navigation, setLoader);
+  } = fetchGet(url, navigation, setLoader,setData);
 
   return (
     <View style={estilos.container}>
@@ -75,7 +75,7 @@ export const PresupuestoScreen = ({ navigation }) => {
           {info ? (
             <FlatList
               style={estilos.list}
-              data={presu}
+              data={data}
               keyExtractor={(x) => x._id}
               renderItem={({ item, index }) => (
                 <ListItem

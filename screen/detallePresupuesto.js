@@ -19,6 +19,7 @@ const { width, height } = Dimensions.get("window");
 export const detallePresupuesto = ({ navigation }) => {
   const [visibility, setVisibility] = useState(false);
   const [loader, setLoader] = useState(true);
+  const [data, setData] = useState([]);
 
   const id_presupuesto = navigation.getParam("_id");
 
@@ -29,18 +30,14 @@ export const detallePresupuesto = ({ navigation }) => {
       setVisibility(true);
     }
   };
-  const {
-    setLoading,
-    loading,
-    data: transacciones,
-    info,
-  } = fetchGet(
+  const { setLoading, loading, info } = fetchGet(
     `http://${dominio}:3000/transacciones${id_presupuesto}`,
     navigation,
-    setLoader
+    setLoader,
+    setData
   );
-  const totales = transacciones.slice(0, 3);
-  const nuevo = transacciones.filter((item) => typeof item === "object");
+  const totales = data.slice(0, 3);
+  const nuevo = data.filter((item) => typeof item === "object");
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" />

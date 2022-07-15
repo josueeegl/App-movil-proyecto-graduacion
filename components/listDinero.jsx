@@ -76,7 +76,7 @@ export default ({ items, navigation, setLoading }) => {
               </Text>
             ) : null}
             <Text
-              style={{ position: "absolute", top: 70, color: "white", opacity: 0.5, fontSize: 10, left: width - 270, }}
+              style={{color: "white", opacity: 0.5, fontSize: 10 }}
             >
               {d}
             </Text>

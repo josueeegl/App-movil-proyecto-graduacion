@@ -20,17 +20,17 @@ export const DineroScreen = ({ navigation }) => {
   const [filter, setFilter] = useState([]);
   const [datos, setDatos] = useState([]);
   const [search, setSearch] = useState("");
+  const [data, setData] = useState([]);
 
   const {
     setLoading,
     loading,
-    data: transacciones,
     info,
-  } = fetchGet(url, navigation, setLoader);
+  } = fetchGet(url, navigation, setLoader, setData);
 
   const searchFilter = (text) => {
     setSearch(text);
-    setDatos(transacciones);
+    setDatos(data);
     if (text !== "") {
       const newData = datos.filter(
         (x) =>
@@ -73,7 +73,7 @@ export const DineroScreen = ({ navigation }) => {
               />
               <FlatList
                 style={{ marginBottom: 70 }}
-                data={filter.length === 0 ? transacciones : filter}
+                data={filter.length === 0 ? data : filter}
                 keyExtractor={(x) => x._id}
                 renderItem={({ item, index }) => (
                   <ListDinero

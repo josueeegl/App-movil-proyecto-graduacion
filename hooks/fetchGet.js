@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default (url, navigation, setLoader) => {
+export default (url, navigation, setLoader, setData) => {
   const [loading, setLoading] = useState(true);
   const [info, setInfo] = useState(true);
-  const [data, setData] = useState([]);
+  
 
   const fetchData = () => {
     AsyncStorage.getItem("token").then(async (x) => {
@@ -32,10 +32,12 @@ export default (url, navigation, setLoader) => {
           }
         })
         .catch((e) => {
+          console.log(e);
           return Alert.alert(
             "Error",
             "Hubo un error, verifica la red e intenta de nuevo."
           );
+          
         });
     });
   };
@@ -52,5 +54,5 @@ export default (url, navigation, setLoader) => {
     };
   }, [loading]);
 
-  return { setLoading, loading, data, info };
+  return { setLoading, loading, info };
 };

@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { clickDelete } from "../functions";
 import { ButtonsOptions } from "./buttonsOptions";
+import { dominio } from "../config";
 const { width } = Dimensions.get("window");
 
 export default ({
@@ -54,7 +55,7 @@ export default ({
               setLoader,
               onDelete,
               item._id,
-              "https://yourfinz.herokuapp.com/presupuesto",
+              `http://${dominio}:3000/presupuesto`,
               navigation,
               "Home",
               setLoading
