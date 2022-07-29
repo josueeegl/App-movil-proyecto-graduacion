@@ -1,14 +1,11 @@
 import React, { useState } from "react";
-import { View,Text, StyleSheet, StatusBar, ScrollView } from "react-native";
+import { View, Text, StyleSheet, StatusBar, ScrollView } from "react-native";
 import {
   Apploader,
   HeaderTransactions,
-  PieChartGX,
-  BarChartGX,
 } from "../components";
 import { fetchGet } from "../hooks";
 import { dominio } from "../config";
-import {FilterDates} from "../functions"
 
 const url = `http://${dominio}:3000/transacciones/resumen`;
 
@@ -34,12 +31,6 @@ export const HomeScreen = ({ navigation }) => {
           {info ? (
             <>
               <HeaderTransactions totales={data} />
-
-              {data[3] ? (
-                <PieChartGX data={data[3]} texto={"INGRESOS"} />
-              ) : null}
-              {data[4] ? <PieChartGX data={data[4]} texto={"GASTOS"} /> : null}
-              <BarChartGX data={[1]} texto={"POR MES"} />
             </>
           ) : (
             <HeaderTransactions totales={"0"} />

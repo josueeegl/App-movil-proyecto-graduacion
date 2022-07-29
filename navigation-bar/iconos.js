@@ -1,5 +1,5 @@
 import React from "react";
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Ionicons, MaterialCommunityIcons, Entypo } from "@expo/vector-icons";
 
 export default ({ routeName, focused, horizontal, tintColor, color }) => {
   let iconName, iconColor;
@@ -41,6 +41,17 @@ export default ({ routeName, focused, horizontal, tintColor, color }) => {
     iconColor = focused ? "#4F93BC" : "#D0D3D4";
     return (
       <Ionicons
+        name={iconName}
+        size={25}
+        tintColor={tintColor}
+        color={iconColor}
+      />
+    );
+  } else if (routeName === "Graficas") {
+    iconName = `bar-graph`;
+    iconColor = focused ? "#4F93BC" : "#D0D3D4";
+    return (
+      <Entypo
         name={iconName}
         size={25}
         tintColor={tintColor}

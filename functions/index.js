@@ -1,2 +1,2 @@
 export { clickDelete } from "./clickDelete";
-export { FilterDates } from "./fechas";
+export { FilterDates, formatDate } from "./fechas";

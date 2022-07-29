@@ -22,9 +22,6 @@ export default (url, navigation, setLoader, setData) => {
             setLoading(false);
             setLoader(false);
             if (data.length === 0) {
-              data.forEach((z) => {
-                console.log(z);
-              });
               setInfo(false);
             } else {
               setInfo(true);

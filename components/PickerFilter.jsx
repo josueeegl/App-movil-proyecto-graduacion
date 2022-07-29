@@ -2,21 +2,29 @@ import React, { useState } from "react";
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 
-export default ({ setDateSelected,dateSelected }) => {
+export default ({ setDateSelected, dateSelected, setLoading }) => {
   return (
-    <View style={{ flex: 1, marginTop: 10, flexDirections: "row" }}>
+    <View
+      style={{
+        alignSelf: "flex-end",
+        marginBottom: 10,
+      }}
+    >
       <Picker
         dropdownIconColor={"white"}
         style={styles.picker}
         selectedValue={dateSelected}
-        onValueChange={setDateSelected}
+        onValueChange={(value) => {
+          setDateSelected(value);
+          setLoading ? setLoading(true) : null;
+        }}
         a
       >
-        <Picker.Item label="Todo" value="todo" />
-        <Picker.Item label="Hoy" value="hoy" />
-        <Picker.Item label="Semana" value="semana" />
-        <Picker.Item label="Mes" value="mes" />
-        <Picker.Item label="Año" value="year" />
+        <Picker.Item label="TODO" value="todo" style={{ fontSize: 12 }} />
+        <Picker.Item label="HOY" value="hoy" style={{ fontSize: 12 }} />
+        <Picker.Item label="SEMANA" value="semana" style={{ fontSize: 12 }} />
+        <Picker.Item label="MES" value="mes" style={{ fontSize: 12 }} />
+        <Picker.Item label="AÑO" value="year" style={{ fontSize: 12 }} />
       </Picker>
     </View>
   );
@@ -24,12 +32,9 @@ export default ({ setDateSelected,dateSelected }) => {
 
 const styles = StyleSheet.create({
   picker: {
-    marginTop: 5,
     backgroundColor: "transparent",
-    fontSize: 12,
-    color: "white",
-    width: 300,
-    padding: 5,
-    borderRadius: 15,
+    fontSize: 8,
+    color: "rgba(255,255,255,0.7)",
+    width: 127,
   },
 });

@@ -6,7 +6,7 @@ import {
   View,
   Dimensions,
 } from "react-native";
-import { clickDelete } from "../functions";
+import { clickDelete, formatDate } from "../functions";
 import { ButtonsOptions } from "./buttonsOptions";
 import { dominio } from "../config";
 const { width } = Dimensions.get("window");
@@ -20,6 +20,12 @@ export default ({
   setLoading,
   item,
 }) => {
+  
+  const ft = formatDate(
+    new Date(item.fecha_inicial).getDate(),
+    new Date(item.fecha_inicial).getMonth()+1,
+    new Date(item.fecha_inicial).getFullYear()
+  );
   const alterar = () => {
     editar(item._id, item.descrip, item.nombre);
   };
@@ -40,13 +46,13 @@ export default ({
           </Text>
           <Text
             style={{
-              fontSize: 18,
+              fontSize: 14,
               opacity: 0.7,
               color: "#eee",
               marginTop: 5,
             }}
           >
-            {item.fecha_inicial.toString().split("T")[0]}
+            {ft}
           </Text>
         </TouchableOpacity>
         <ButtonsOptions
@@ -76,7 +82,7 @@ export default ({
 const styles = StyleSheet.create({
   container: {
     width: "98%",
-    height: 120,
+    height: 100,
     alignSelf: "center",
     flexDirection: "row",
     padding: 10,

@@ -7,6 +7,7 @@ import AppInicio from "../navigations/Inicio";
 import AppPresupuesto from "../navigations/Presupuesto";
 import AppOpc from "../navigations/Opciones";
 import AppDinero from "../navigations/Dinero";
+import AppGrafic from "../navigations/Graficas";
 
 export const AppNavegador = createBottomTabNavigator(
   {
@@ -26,6 +27,12 @@ export const AppNavegador = createBottomTabNavigator(
       screen: AppDinero,
       navigationOptions: {
         title: "Historial",
+      },
+    },
+    Graficas: {
+      screen: AppGrafic,
+      navigationOptions: {
+        title: "Gráficas",
       },
     },
     Opciones: {

@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { IconButton } from "react-native-paper";
-import { fetchPost, formData } from "../hooks";
+import { fetchPost, formData, fetchGet } from "../hooks";
 import { dominio } from "../config";
 import {
   PickerCategory,
@@ -18,6 +18,7 @@ import {
   PickerImage,
   ButtonGroup,
   Apploader,
+  PickerPresupuesto,
 } from "./";
 
 export const ModalTransactions = ({
@@ -25,17 +26,22 @@ export const ModalTransactions = ({
   setVisibility,
   ID,
   setLoading,
+  navigation,
 }) => {
   const [selectedType, setSelectedType] = useState(1);
   const [category, setCategory] = useState();
+  const [presupuesto, setPresupuesto] = useState(ID);
   const [pago, setPago] = useState();
   const [fecha, setFecha] = useState(new Date());
   const [descripcion, setDescripcion] = useState("");
   const [valor, setValor] = useState("");
   const [image, setImage] = useState({});
   const [loader, setLoader] = useState(false);
+  const [data, setData] = useState([]);
 
   const setear = () => {
+    setDescripcion("");
+    setValor("");
     if (visibility === true) {
       setDescripcion("");
       setVisibility(false);
@@ -48,7 +54,7 @@ export const ModalTransactions = ({
   };
 
   const values = {
-    presupuesto_id: ID,
+    presupuesto_id: presupuesto,
     nombre: category,
     descrip: descripcion,
     valor: valor,
@@ -69,11 +75,19 @@ export const ModalTransactions = ({
     );
   };
 
+  const { loading, info } = fetchGet(
+    `http://${dominio}:3000/presupuesto`,
+    navigation,
+    setLoader,
+    setData
+  );
+
   return (
     <Modal animationType="slide" visible={visibility}>
       <View style={styles.container}>
         <KeyboardAwareScrollView>
           <ButtonGroup buttons={["GASTO", "INGRESO"]} afterClick={clickType} />
+          <PickerPresupuesto setPresu={setPresupuesto} data={data} id={ID} />
           <PickerCategory
             selectedType={selectedType}
             setCategory={setCategory}
@@ -97,15 +111,25 @@ export const ModalTransactions = ({
           >
             Valor
           </Text>
-          <TextInput
-            placeholderTextColor={"white"}
-            style={styles.textInput}
-            placeholder="0.0"
-            onChangeText={setValor}
-            value={valor}
-            keyboardType="numeric"
-          />
-          <PickerPago setPago={setPago} visible={selectedType} pago={pago} />
+          <View style={{ flexDirection: "row", padding: 5 }}>
+            <TextInput
+              placeholderTextColor={"white"}
+              style={[
+                styles.textInput,
+                {
+                  height: 50,
+                  fontSize: 16,
+                  backgroundColor: "transparent",
+                },
+              ]}
+              placeholder="0.0"
+              onChangeText={setValor}
+              value={valor}
+              keyboardType="numeric"
+            />
+            <PickerPago setPago={setPago} visible={selectedType} pago={pago} />
+          </View>
+
           <PickerDate setFecha={setFecha} />
           <PickerImage afterClick={setImage} />
           <View
@@ -162,5 +186,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     backgroundColor: "#47474F",
     borderRadius: 2,
+    fontSize: 13,
   },
 });

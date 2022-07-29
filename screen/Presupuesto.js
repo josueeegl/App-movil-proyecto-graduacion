@@ -11,7 +11,7 @@ import {
 import { IconButton } from "react-native-paper";
 import { Modal, ListItem, Apploader } from "../components";
 import { onDelete, useForm, onSubmitX, fetchGet } from "../hooks";
-import { dominio } from "../config";
+import { dominio } from "../config"; 
 
 const url = `http://${dominio}:3000/presupuesto`;
 

@@ -52,7 +52,7 @@ export default ({ afterClick }) => {
 
   return (
     <View style={{ flex: 1, marginTop: 10, alignItems: "center" }}>
-      <Text style={{ fontSize: 14, color: "white", fontWeight: "bold" }}>
+      <Text style={{ fontSize: 14, color: "rgba(255, 255, 255, 0.5)", fontWeight: "bold" }}>
         ¿Quieres agregar una imagen?
       </Text>
       <View>
@@ -88,13 +88,13 @@ export default ({ afterClick }) => {
             <IconButton
               icon="image-search"
               color="#4F93BC"
-              size={55}
+              size={45}
               onPress={PickImage}
             />
             <IconButton
               icon="camera-image"
               color="#4F93BC"
-              size={55}
+              size={45}
               onPress={PickImage2}
             />
           </View>

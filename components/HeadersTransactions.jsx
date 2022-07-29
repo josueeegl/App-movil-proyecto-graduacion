@@ -73,7 +73,7 @@ const styles = (totales) =>
   StyleSheet.create({
     container: {
       backgroundColor: "rgba(255,255,255,0.1)",
-      marginBottom: 30,
+      marginBottom: 5,
       borderBottomRightRadius: 40,
       borderBottomLeftRadius: 40,
       padding: 15,

@@ -7,14 +7,19 @@ import {
   Platform,
 } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { formatDate } from "../functions";
 
 export default ({ setFecha, tag, styl }) => {
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
   const [text, setText] = useState("");
-  const [textFt, setTextFt] = useState(
-    tag ||
+  const [textFt, setTextFt] = useState(tag ||
+    formatDate(
+      new Date().getDate(),
+      new Date().getMonth() + 1,
+      new Date().getFullYear()
+    ) ||
       new Date().getDate() +
         " - " +
         (new Date().getMonth() + 1) +
@@ -36,11 +41,11 @@ export default ({ setFecha, tag, styl }) => {
     setText(tempDate);
     if (event.type !== "dismissed") {
       setTextFt(
-        tempDate.getDate() +
-          " - " +
-          (tempDate.getMonth() + 1) +
-          " - " +
+        formatDate(
+          tempDate.getDate(),
+          tempDate.getMonth() + 1,
           tempDate.getFullYear()
+        )
       );
     }
     setFecha(tempDate);
@@ -55,9 +60,9 @@ export default ({ setFecha, tag, styl }) => {
       )}
       <TouchableOpacity
         onPress={() => showMode("date")}
-        style={tag ? [styl.textInput, {marginTop: 10}] : styles.pick}
+        style={tag ? [styl.textInput, { marginTop: 10 }] : styles.pick}
       >
-        <Text style={{ color: "white" }}>{textFt}</Text>
+        <Text style={{ color: "white", fontSize: 13}}>{textFt}</Text>
       </TouchableOpacity>
       {show && (
         <DateTimePicker

@@ -9,7 +9,7 @@ export const clickDelete = (
   pantalla,
   setLoading
 ) => {
-  return Alert.alert("¿Quieres eliminarlo?", "", [
+  return Alert.alert("¿Quieres eliminarlo?", "Se eliminarán los datos asociados a este", [
     {
       text: "NO",
       style: "cancel",

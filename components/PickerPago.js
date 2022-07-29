@@ -5,23 +5,19 @@ import { Picker } from "@react-native-picker/picker";
 export default ({ setPago, visible, pago }) => {
   if (visible == 0) {
     return (
-      <View style={{ flex: 1, marginTop: 10 }}>
-        <Text style={{ fontSize: 14, color: "white", fontWeight: "bold" }}>
-          Tipo de pago
-        </Text>
         <Picker
           style={styles.picker}
           selectedValue={pago}
           onValueChange={setPago}
         >
-          <Picker.Item label="Efectivo" value="Efectivo" />
+          <Picker.Item label="Efectivo" value="Efectivo"  style={{ fontSize: 13 }} />
           <Picker.Item
             label="Tarjeta de crédito o débito"
             value="Tarjeta de crédito o débito"
+            style={{ fontSize: 13 }}
           />
-          <Picker.Item label="Otro" value="Otro" />
+          <Picker.Item label="Otro" value="Otro" style={{ fontSize: 13 }}/>
         </Picker>
-      </View>
     );
   }
   return null;
@@ -29,12 +25,10 @@ export default ({ setPago, visible, pago }) => {
 
 const styles = StyleSheet.create({
   picker: {
-    marginTop: 5,
-    backgroundColor: "#47474F",
-    fontSize: 12,
+    marginLeft: 20,
+    backgroundColor: "transparent",
+    fontSize: 13,
     color: "white",
-    width: 300,
-    padding: 5,
-    borderRadius: 15,
+    width: 220,
   },
 });

@@ -8,3 +8,4 @@ export { RegisterScreen } from "./register";
 export { AuthLoading } from "./AuthLoading";
 export { detalleTrans } from "./detalleTrans";
 export { DetalleDinero } from "./detalleDinero";
+export { GraficaScreen } from "./Graficas";

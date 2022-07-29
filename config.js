@@ -1,1 +1,1 @@
-export const dominio = "192.168.140.222";
+export const dominio = "192.168.60.222";
