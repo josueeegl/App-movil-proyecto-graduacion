@@ -13,4 +13,6 @@ export { default as HeaderTransactions } from "./HeadersTransactions";
 export { default as ListDinero } from "./listDinero";
 export { default as PieChartGX } from "./PieChart";
 export { default as PickerFilter } from "./PickerFilter";
+export { default as Stories } from "./Stories";
+export { default as StoriesDetail } from "./StoriesDetail";
 export { ButtonsOptions } from "./buttonsOptions";

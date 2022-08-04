@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Dimensions, Text } from "react-native";
 import { PieChart } from "react-native-chart-kit";
-import "intl/locale-data/jsonp/en-US";
 
 export default ({ data, texto }) => {
   const array = [];
   function moneda(x) {
-    return x.toLocaleString("en-US", { minimumFractionDigits: 2 });
+    let num = new Number(x);
+    let text = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return text;
   }
 
   const listItem = () => {
@@ -33,20 +34,20 @@ export default ({ data, texto }) => {
     return array;
   };
   return (
-    <View
-      style={{
-        marginTop: 5,
-        marginBottom: 15,
-        borderWidth: 1,
-        borderColor: "rgba(255,255,255,0.2)",
-        width: "95%",
-        borderRadius: 5,
-        alignSelf: "center",
-        padding: 10,
-      }}
-    >
+    <View>
       {data.length > 0 ? (
-        <>
+        <View
+          style={{
+            marginTop: 5,
+            marginBottom: 15,
+            borderWidth: 1,
+            borderColor: "rgba(255,255,255,0.2)",
+            width: "95%",
+            borderRadius: 5,
+            alignSelf: "center",
+            padding: 10,
+          }}
+        >
           <Text
             style={{
               fontSize: 15,
@@ -59,7 +60,7 @@ export default ({ data, texto }) => {
           </Text>
           <PieChart
             data={data}
-            width={Dimensions.get("window").width - 20}
+            width={Dimensions.get("window").width - 40}
             height={170}
             chartConfig={{
               color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
@@ -72,7 +73,7 @@ export default ({ data, texto }) => {
             center={[25, 0]}
           />
           {listItem()}
-        </>
+        </View>
       ) : null}
     </View>
   );
