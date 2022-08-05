@@ -7,8 +7,22 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  ImageBackground,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+
+const colors = [
+  "#80B0C6",
+  "#F5D2BC",
+  "#F9F5F4",
+  "#E5D7D7",
+  "#EE805F",
+  "#F7BDC9",
+  "#327C7E",
+  "#ffffff",
+  "#bc2a8d",
+  "#e95950",
+];
 
 export default ({ data, setDetail, navigation }) => {
   return (
@@ -19,22 +33,34 @@ export default ({ data, setDetail, navigation }) => {
         showsHorizontalScrollIndicator={false}
       >
         {data.map((item, index) => {
+          var Aleatorio = Math.floor(Math.random() * 10);
           return (
-            <TouchableOpacity
-              style={{ width: 85, padding: 5 }}
-              onPress={() => {
-                navigation.navigate("HomeDetail", { item: item });
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+                padding: 5,
               }}
               key={index}
             >
-              <LinearGradient
-                colors={["#bc2a8d", "#e95950"]}
-                style={{ padding: 2, borderRadius: 35 }}
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate("HomeDetail", { item: item });
+                }}
               >
-                <Image source={{ uri: item.imagen }} style={style.userImage} />
-              </LinearGradient>
-              <Text style={style.text}>{item.name}</Text>
-            </TouchableOpacity>
+                <LinearGradient
+                  colors={[colors[Aleatorio], colors[Aleatorio]]}
+                  style={{ padding: 2, borderRadius: 15 }}
+                >
+                  <Text style={style.userImage}>{item.name}</Text>
+                  <Image
+                    source={{ uri: item.imagen }}
+                    style={{ height: 50, width: 50, opacity: 0.5, alignSelf: "center", bottom: 20 }}
+                  />
+                </LinearGradient>
+              </TouchableOpacity>
+            </View>
           );
         })}
       </ScrollView>
@@ -44,16 +70,14 @@ export default ({ data, setDetail, navigation }) => {
 
 const style = StyleSheet.create({
   userImage: {
-    height: 70,
-    width: 70,
-    borderRadius: 35,
-    borderColor: "#fff",
-    borderWidth: 4,
-  },
-  text: {
+    padding: 10,
+    height: 80,
+    maxWidth: 130,
+    borderRadius: 15,
     textAlign: "center",
-    fontSize: 12,
-    textTransform: "lowercase",
-    marginTop: 5,
+    fontWeight: "bold",
+    fontSize: 14,
+    color: "#393943",
+    zIndex: 1,
   },
 });

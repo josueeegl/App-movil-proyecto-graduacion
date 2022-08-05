@@ -34,37 +34,27 @@ export const HomeScreen = ({ navigation }) => {
     {
       name: "Isabel",
       imagen:
-        "https://res.cloudinary.com/josueeegl/image/upload/v1656367306/yourFinz/Mar-Business_11_habop5.jpg",
+        "https://res.cloudinary.com/josueeegl/image/upload/v1659677226/yourFinz/fondo8_xypuoh.png",
     },
     {
-      name: "Juan",
+      name: "Educación Financiera",
       imagen:
-        "https://res.cloudinary.com/josueeegl/image/upload/v1656367306/yourFinz/Mar-Business_11_habop5.jpg",
+        "https://res.cloudinary.com/josueeegl/image/upload/v1659677227/yourFinz/fondo9_x4g3o7.png",
     },
     {
-      name: "Juan",
+      name: "Ahorro",
       imagen:
-        "https://res.cloudinary.com/josueeegl/image/upload/v1656367306/yourFinz/Mar-Business_11_habop5.jpg",
+        "https://res.cloudinary.com/josueeegl/image/upload/v1659677227/yourFinz/fondo10_on0kwl.png",
     },
     {
-      name: "Juan",
+      name: "Inversión",
       imagen:
-        "https://res.cloudinary.com/josueeegl/image/upload/v1656367306/yourFinz/Mar-Business_11_habop5.jpg",
+        "https://res.cloudinary.com/josueeegl/image/upload/v1656367281/yourFinz/5867_vgobox.jpg",
     },
     {
-      name: "Juan",
+      name: "Cultura financiera",
       imagen:
-        "https://res.cloudinary.com/josueeegl/image/upload/v1656367306/yourFinz/Mar-Business_11_habop5.jpg",
-    },
-    {
-      name: "Juan",
-      imagen:
-        "https://res.cloudinary.com/josueeegl/image/upload/v1656367306/yourFinz/Mar-Business_11_habop5.jpg",
-    },
-    {
-      name: "Juan",
-      imagen:
-        "https://res.cloudinary.com/josueeegl/image/upload/v1656367306/yourFinz/Mar-Business_11_habop5.jpg",
+        "https://res.cloudinary.com/josueeegl/image/upload/v1659677224/yourFinz/fondo3_ugas0t.png",
     },
   ];
 
