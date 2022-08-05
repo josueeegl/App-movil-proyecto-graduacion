@@ -10,9 +10,7 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
-
-export default ({ data, setViewDetail, setDetail }) => {
-
+export default ({ data, setDetail, navigation }) => {
   return (
     <View>
       <ScrollView
@@ -24,16 +22,14 @@ export default ({ data, setViewDetail, setDetail }) => {
           return (
             <TouchableOpacity
               style={{ width: 85, padding: 5 }}
-              onPressIn={() => {
-                setViewDetail(true);
-                setDetail(item)
+              onPress={() => {
+                navigation.navigate("HomeDetail", { item: item });
               }}
-              onPressOut={() => {setViewDetail(false)}}
               key={index}
             >
               <LinearGradient
                 colors={["#bc2a8d", "#e95950"]}
-                style={{ padding: 2, borderRadius: 50 }}
+                style={{ padding: 2, borderRadius: 35 }}
               >
                 <Image source={{ uri: item.imagen }} style={style.userImage} />
               </LinearGradient>
@@ -42,7 +38,6 @@ export default ({ data, setViewDetail, setDetail }) => {
           );
         })}
       </ScrollView>
-      
     </View>
   );
 };
@@ -51,7 +46,7 @@ const style = StyleSheet.create({
   userImage: {
     height: 70,
     width: 70,
-    borderRadius: 50,
+    borderRadius: 35,
     borderColor: "#fff",
     borderWidth: 4,
   },
