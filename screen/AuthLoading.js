@@ -9,7 +9,7 @@ export const AuthLoading = ({ navigation }) => {
       AsyncStorage.getItem("token").then((x) => {
         navigation.navigate(x ? "Root" : "OnBoarding");
       });
-    }, 5000);
+    }, 3000);
     return () => clearTimeout(timer);
   }, []);
   return (

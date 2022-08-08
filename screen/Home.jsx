@@ -12,7 +12,7 @@ import {
   Apploader,
   HeaderTransactions,
   Stories,
-  StoriesDetail,
+  ModalHome,
 } from "../components";
 import { fetchGet } from "../hooks";
 import { dominio } from "../config";
@@ -21,6 +21,8 @@ const height = Dimensions.get("window").height;
 const url = `http://${dominio}:3000/transacciones/resumen`;
 
 export const HomeScreen = ({ navigation }) => {
+  const [DataItem, setDataItem] = useState({});
+  const [visibility, setVisibility] = useState(false);
   const [loader, setLoader] = useState(true);
   const [data, setData] = useState([]);
   const { setLoading, loading, info } = fetchGet(
@@ -32,29 +34,106 @@ export const HomeScreen = ({ navigation }) => {
 
   const dat = [
     {
-      name: "Isabel",
-      imagen:
-        "https://res.cloudinary.com/josueeegl/image/upload/v1659677226/yourFinz/fondo8_xypuoh.png",
+      title: "Conceptos clave",
+      data: [
+        [
+          {
+            name: "Isabel",
+            autor: "Josueé GRCIA",
+            url: "https://res.cloudinary.com/josueeegl/image/upload/v1656367306/yourFinz/Mar-Business_11_habop5.jpg",
+            descripcion:
+              "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem et minus deserunt tempore adipisci molestias atque ipsam, iusto vitae ullam maxime quam error fugiat accusamus.",
+            imagen:
+              "https://res.cloudinary.com/josueeegl/image/upload/v1659677226/yourFinz/fondo8_xypuoh.png",
+          },
+          {
+            name: "Isabel",
+            autor: "Josueé GRCIA",
+            url: "https://res.cloudinary.com/josueeegl/image/upload/v1656367306/yourFinz/Mar-Business_11_habop5.jpg",
+            descripcion:
+              "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem et minus deserunt tempore adipisci molestias atque ipsam, iusto vitae ullam maxime quam error fugiat accusamus.",
+            imagen:
+              "https://res.cloudinary.com/josueeegl/image/upload/v1659677226/yourFinz/fondo8_xypuoh.png",
+          },
+          {
+            name: "Educación Financiera",
+            autor: "Josueé GRCIA",
+            url: "https://res.cloudinary.com/josueeegl/image/upload/v1656367306/yourFinz/Mar-Business_11_habop5.jpg",
+            descripcion:
+              "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem et minus deserunt tempore adipisci molestias atque ipsam, iusto vitae ullam maxime quam error fugiat accusamus.",
+            imagen:
+              "https://res.cloudinary.com/josueeegl/image/upload/v1659677226/yourFinz/fondo8_xypuoh.png",
+          },
+          {
+            name: "Cultura Financiera",
+            autor: "Josueé GRCIA",
+            url: "https://res.cloudinary.com/josueeegl/image/upload/v1656367306/yourFinz/Mar-Business_11_habop5.jpg",
+            descripcion:
+              "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem et minus deserunt tempore adipisci molestias atque ipsam, iusto vitae ullam maxime quam error fugiat accusamus.",
+            imagen:
+              "https://res.cloudinary.com/josueeegl/image/upload/v1659677226/yourFinz/fondo8_xypuoh.png",
+          },
+          {
+            name: "Ahorro",
+            autor: "Josueé GRCIA",
+            url: "https://res.cloudinary.com/josueeegl/image/upload/v1656367306/yourFinz/Mar-Business_11_habop5.jpg",
+            descripcion:
+              "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem et minus deserunt tempore adipisci molestias atque ipsam, iusto vitae ullam maxime quam error fugiat accusamus.",
+            imagen:
+              "https://res.cloudinary.com/josueeegl/image/upload/v1659677226/yourFinz/fondo8_xypuoh.png",
+          },
+        ],
+      ],
     },
     {
-      name: "Educación Financiera",
-      imagen:
-        "https://res.cloudinary.com/josueeegl/image/upload/v1659677227/yourFinz/fondo9_x4g3o7.png",
+      title: "Como ahorrar",
+      data: [
+        [
+          {
+            name: "Isabel",
+            autor: "Josueé GRCIA",
+            url: "https://res.cloudinary.com/josueeegl/image/upload/v1656367306/yourFinz/Mar-Business_11_habop5.jpg",
+            descripcion:
+              "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem et minus deserunt tempore adipisci molestias atque ipsam, iusto vitae ullam maxime quam error fugiat accusamus.",
+            imagen:
+              "https://res.cloudinary.com/josueeegl/image/upload/v1659677226/yourFinz/fondo8_xypuoh.png",
+          },
+          {
+            name: "Isabel",
+            autor: "Josueé GRCIA",
+            url: "https://res.cloudinary.com/josueeegl/image/upload/v1656367306/yourFinz/Mar-Business_11_habop5.jpg",
+            descripcion:
+              "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem et minus deserunt tempore adipisci molestias atque ipsam, iusto vitae ullam maxime quam error fugiat accusamus.",
+            imagen:
+              "https://res.cloudinary.com/josueeegl/image/upload/v1659677226/yourFinz/fondo8_xypuoh.png",
+          },
+        ],
+      ],
     },
     {
-      name: "Ahorro",
-      imagen:
-        "https://res.cloudinary.com/josueeegl/image/upload/v1659677227/yourFinz/fondo10_on0kwl.png",
-    },
-    {
-      name: "Inversión",
-      imagen:
-        "https://res.cloudinary.com/josueeegl/image/upload/v1656367281/yourFinz/5867_vgobox.jpg",
-    },
-    {
-      name: "Cultura financiera",
-      imagen:
-        "https://res.cloudinary.com/josueeegl/image/upload/v1659677224/yourFinz/fondo3_ugas0t.png",
+      title: "Estrategias para tener cultura financiera",
+      data: [
+        [
+          {
+            name: "Isabel",
+            autor: "Josueé GRCIA",
+            url: "https://res.cloudinary.com/josueeegl/image/upload/v1656367306/yourFinz/Mar-Business_11_habop5.jpg",
+            descripcion:
+              "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem et minus deserunt tempore adipisci molestias atque ipsam, iusto vitae ullam maxime quam error fugiat accusamus.",
+            imagen:
+              "https://res.cloudinary.com/josueeegl/image/upload/v1659677226/yourFinz/fondo8_xypuoh.png",
+          },
+          {
+            name: "Isabel",
+            autor: "Josueé GRCIA",
+            url: "https://res.cloudinary.com/josueeegl/image/upload/v1656367306/yourFinz/Mar-Business_11_habop5.jpg",
+            descripcion:
+              "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem et minus deserunt tempore adipisci molestias atque ipsam, iusto vitae ullam maxime quam error fugiat accusamus.",
+            imagen:
+              "https://res.cloudinary.com/josueeegl/image/upload/v1659677226/yourFinz/fondo8_xypuoh.png",
+          },
+        ],
+      ],
     },
   ];
 
@@ -64,9 +143,7 @@ export const HomeScreen = ({ navigation }) => {
       {loading ? (
         <Apploader />
       ) : (
-        <ScrollView
-          style={{ width: "100%", height: "100%", top: StatusBar.length }}
-        >
+        <View style={{ width: "100%", height: "100%", top: StatusBar.length }}>
           {info ? (
             <>
               <HeaderTransactions totales={data} />
@@ -76,11 +153,18 @@ export const HomeScreen = ({ navigation }) => {
           )}
           <Stories
             data={dat}
-            navigation={navigation}
+            visibility={visibility}
+            setVisibility={setVisibility}
+            setDataItem={setDataItem}
           />
-        </ScrollView>
+        </View>
       )}
       {loader ? <Apploader /> : null}
+      <ModalHome
+        item={DataItem}
+        visibility={visibility}
+        setVisibility={setVisibility}
+      />
     </View>
   );
 };
@@ -91,6 +175,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
     backgroundColor: "#393943",
-    marginBottom: 80,
+    marginBottom: 10,
   },
 });

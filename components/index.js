@@ -14,4 +14,5 @@ export { default as ListDinero } from "./listDinero";
 export { default as PieChartGX } from "./PieChart";
 export { default as PickerFilter } from "./PickerFilter";
 export { default as Stories } from "./Stories";
+export { ModalHome } from "./ModalHome";
 export { ButtonsOptions } from "./buttonsOptions";

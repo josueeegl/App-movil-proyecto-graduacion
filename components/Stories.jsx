@@ -8,8 +8,10 @@ import {
   Image,
   TouchableOpacity,
   ImageBackground,
+  SectionList,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { ModalHome } from "../components/ModalHome";
 
 const colors = [
   "#80B0C6",
@@ -24,60 +26,74 @@ const colors = [
   "#e95950",
 ];
 
-export default ({ data, setDetail, navigation }) => {
+export default ({ data, visibility, setVisibility, setDataItem }) => {
+  var Aleatorio = Math.floor(Math.random() * 10);
+
   return (
-    <View>
-      <ScrollView
-        style={{ flex: 1 }}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-      >
-        {data.map((item, index) => {
-          var Aleatorio = Math.floor(Math.random() * 10);
-          return (
-            <View
-              style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-                padding: 5,
-              }}
-              key={index}
-            >
+    <SectionList
+      style={{ marginBottom: 60, marginTop: 10 }}
+      keyExtractor={(item, index) => index.toString()}
+      sections={data}
+      renderItem={({ item }) => (
+        <ScrollView
+          style={{ margin: 10, flex: 1 }}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+        >
+          {item.map((item, index) => {
+            var Aleatorio = Math.floor(Math.random() * 10);
+            return (
               <TouchableOpacity
+                style={{ padding: 5, width: 100, height: 160 }}
+                key={index}
                 onPress={() => {
-                  navigation.navigate("HomeDetail", { item: item });
+                  setVisibility(true);
+                  setDataItem(item);
                 }}
               >
                 <LinearGradient
                   colors={[colors[Aleatorio], colors[Aleatorio]]}
                   style={{ padding: 2, borderRadius: 15 }}
                 >
-                  <Text style={style.userImage}>{item.name}</Text>
                   <Image
                     source={{ uri: item.imagen }}
-                    style={{ height: 50, width: 50, opacity: 0.5, alignSelf: "center", bottom: 20 }}
+                    style={{
+                      height: 110,
+                      width: "100%",
+                      borderRadius: 15,
+                    }}
                   />
                 </LinearGradient>
+                <Text style={style.userImage}>{item.name}</Text>
               </TouchableOpacity>
-            </View>
-          );
-        })}
-      </ScrollView>
-    </View>
+            );
+          })}
+        </ScrollView>
+      )}
+      renderSectionHeader={({ section }) => (
+        <View>
+          <Text
+            style={{
+              padding: 10,
+              borderRadius: 10,
+              color: "white",
+              fontSize: 14,
+              fontWeight: "bold",
+            }}
+          >
+            {section.title}
+          </Text>
+        </View>
+      )}
+    />
   );
 };
 
 const style = StyleSheet.create({
   userImage: {
-    padding: 10,
     height: 80,
-    maxWidth: 130,
-    borderRadius: 15,
     textAlign: "center",
-    fontWeight: "bold",
-    fontSize: 14,
-    color: "#393943",
-    zIndex: 1,
+    fontSize: 10,
+    color: "rgba(255, 255, 255, 0.8)",
   },
 });
