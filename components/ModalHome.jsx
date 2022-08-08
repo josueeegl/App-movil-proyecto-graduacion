@@ -34,7 +34,7 @@ export const ModalHome = ({ item, visibility, setVisibility }) => {
             fontWeight: "bold",
             marginTop: 20,
             left: 20,
-            maxWidth: "90%",
+            maxWidth: "90%", 
           }}
         >
           {item.name}
