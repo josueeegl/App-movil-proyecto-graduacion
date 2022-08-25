@@ -6,7 +6,7 @@ export default (setLoader, setData, setId, navigation) => {
   const valueEmail = async () => {
     const value = await AsyncStorage.getItem("email");
     const token = await AsyncStorage.getItem("token");
-    const response = await fetch(`http://${dominio}:3000/user${value}`, {
+    const response = await fetch(`${dominio}/user${value}`, {
       method: "GET",
       headers: {
         authorization: token,

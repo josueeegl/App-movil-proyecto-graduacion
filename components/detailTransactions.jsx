@@ -41,7 +41,7 @@ export const DetailTransactions = ({ navigation, pantalla }) => {
 
     if (Object.entries(data).length !== 0) {
       fetchPut(
-        `http://${dominio}:3000/transacciones${items._id}`,
+        `${dominio}/transacciones${items._id}`,
         data,
         navigation,
         pantalla
@@ -158,7 +158,7 @@ export const DetailTransactions = ({ navigation, pantalla }) => {
                 setLoader,
                 onDelete,
                 items._id,
-                `http://${dominio}:3000/transacciones`,
+                `${dominio}/transacciones`,
                 navigation,
                 pantalla,
                 setLoading

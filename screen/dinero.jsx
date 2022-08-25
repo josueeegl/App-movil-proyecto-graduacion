@@ -14,7 +14,7 @@ import { fetchGet } from "../hooks";
 import { dominio } from "../config";
 import { IconButton } from "react-native-paper";
 
-const url = `http://${dominio}:3000/transacciones/detalle`;
+const url = `${dominio}/transacciones/detalle`;
 
 export const DineroScreen = ({ navigation }) => {
   const [visibility, setVisibility] = useState(false);

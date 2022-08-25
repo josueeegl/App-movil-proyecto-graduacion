@@ -1,6 +1,15 @@
 import React, { useCallback, useRef, useState } from "react";
-import { View, Text, StyleSheet, Dimensions, Image, Modal } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  Image,
+  Modal,
+  TouchableOpacity,
+} from "react-native";
 import { IconButton } from "react-native-paper";
+import * as Linking from "expo-linking";
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
@@ -18,6 +27,7 @@ const colors = [
 
 export const ModalHome = ({ item, visibility, setVisibility }) => {
   var Aleatorio = Math.floor(Math.random() * 8);
+
   return (
     <Modal
       onRequestClose={() => setVisibility(false)}
@@ -34,24 +44,72 @@ export const ModalHome = ({ item, visibility, setVisibility }) => {
             fontWeight: "bold",
             marginTop: 20,
             left: 20,
-            maxWidth: "90%", 
+            maxWidth: "90%",
           }}
         >
           {item.name}
         </Text>
+        {item.autor ? (
+          <Text
+            style={{
+              color: "rgba(0, 0, 0, 0.6)",
+              fontWeight:"800",
+              fontSize: 14,
+              left: 20,
+              maxWidth: "90%",
+            }}
+          >
+            {item.autor}
+          </Text>
+        ) : null}
         <Text
           style={{
             alignSelf: "center",
             color: "black",
-            fontSize: 16,
+            fontSize: 14,
             fontWeight: "900",
-            marginTop: 40,
-            maxWidth: "80%",
-            textAlign:"center"
+            marginTop: 20,
+            maxWidth: "92%",
+            textAlign: "center",
           }}
         >
           {item.descripcion}
         </Text>
+        {item.url ? (
+          <TouchableOpacity
+            onPress={() => Linking.openURL(item.url)}
+            style={{
+              flexDirection: "row",
+              position: "absolute",
+              alignSelf: "center",
+              top: height - 80,
+              padding: 15,
+              borderRadius: 50,
+              width: "60%",
+              opacity: 0.9,
+              backgroundColor: "#393943",
+            }}
+          >
+            <IconButton
+              icon="apple-keyboard-control"
+              color="white"
+              size={25}
+              style={styles(Aleatorio).btnContainer2}
+            />
+            <Text
+              style={{
+                fontSize: 14,
+                letterSpacing: 2,
+                color: "white",
+                fontWeight: "bold",
+                textAlign: "center",
+                marginRight: 5,
+              }}
+            >
+              Aprender más
+            </Text>
+          </TouchableOpacity>
+        ) : null}
         <IconButton
           icon="close"
           color="#393943"
@@ -87,5 +145,10 @@ const styles = (Aleatorio) =>
       top: -10,
       right: -5,
       zIndex: 1,
+    },
+    btnContainer2: {
+      position: "absolute",
+      top: 7,
+      right: 5,
     },
   });

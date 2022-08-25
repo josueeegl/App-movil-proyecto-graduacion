@@ -36,7 +36,7 @@ export default ({ data, visibility, setVisibility, setDataItem }) => {
       sections={data}
       renderItem={({ item }) => (
         <ScrollView
-          style={{ margin: 10, flex: 1 }}
+          style={{flex: 1, marginLeft: 10, marginRight: 10, }}
           horizontal
           showsHorizontalScrollIndicator={false}
         >
@@ -44,7 +44,7 @@ export default ({ data, visibility, setVisibility, setDataItem }) => {
             var Aleatorio = Math.floor(Math.random() * 10);
             return (
               <TouchableOpacity
-                style={{ padding: 5, width: 100, height: 160 }}
+                style={{ padding: 5, width: 100, maxHeight: 170 }}
                 key={index}
                 onPress={() => {
                   setVisibility(true);
@@ -79,6 +79,7 @@ export default ({ data, visibility, setVisibility, setDataItem }) => {
               color: "white",
               fontSize: 14,
               fontWeight: "bold",
+              maxWidth: "90%"
             }}
           >
             {section.title}

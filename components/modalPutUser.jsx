@@ -24,7 +24,7 @@ export default ({
     const data = {};
     nombre !== "" ? (data.nombre = nombre) : null;
     email !== "" ? (data.email = email) : null;
-    fetch(`http://${dominio}:3000/user/?id=${id}&password=${password}`, {
+    fetch(`${dominio}/user/?id=${id}&password=${password}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

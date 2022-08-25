@@ -13,7 +13,7 @@ import { Modal, ListItem, Apploader } from "../components";
 import { onDelete, useForm, onSubmitX, fetchGet } from "../hooks";
 import { dominio } from "../config"; 
 
-const url = `http://${dominio}:3000/presupuesto`;
+const url = `${dominio}/presupuesto`;
 
 export const PresupuestoScreen = ({ navigation }) => {
   const [visibility, setVisibility] = useState(false);

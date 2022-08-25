@@ -18,7 +18,8 @@ import { fetchGet } from "../hooks";
 import { dominio } from "../config";
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
-const url = `http://${dominio}:3000/transacciones/resumen`;
+//const url = `http://${dominio}:3000/transacciones/resumen`;
+const url = `${dominio}/informacion`;
 
 export const HomeScreen = ({ navigation }) => {
   const [DataItem, setDataItem] = useState({});
@@ -32,110 +33,6 @@ export const HomeScreen = ({ navigation }) => {
     setData
   );
 
-  const dat = [
-    {
-      title: "Conceptos clave",
-      data: [
-        [
-          {
-            name: "Isabel",
-            autor: "Josueé GRCIA",
-            url: "https://res.cloudinary.com/josueeegl/image/upload/v1656367306/yourFinz/Mar-Business_11_habop5.jpg",
-            descripcion:
-              "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem et minus deserunt tempore adipisci molestias atque ipsam, iusto vitae ullam maxime quam error fugiat accusamus.",
-            imagen:
-              "https://res.cloudinary.com/josueeegl/image/upload/v1659677226/yourFinz/fondo8_xypuoh.png",
-          },
-          {
-            name: "Isabel",
-            autor: "Josueé GRCIA",
-            url: "https://res.cloudinary.com/josueeegl/image/upload/v1656367306/yourFinz/Mar-Business_11_habop5.jpg",
-            descripcion:
-              "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem et minus deserunt tempore adipisci molestias atque ipsam, iusto vitae ullam maxime quam error fugiat accusamus.",
-            imagen:
-              "https://res.cloudinary.com/josueeegl/image/upload/v1659677226/yourFinz/fondo8_xypuoh.png",
-          },
-          {
-            name: "Educación Financiera",
-            autor: "Josueé GRCIA",
-            url: "https://res.cloudinary.com/josueeegl/image/upload/v1656367306/yourFinz/Mar-Business_11_habop5.jpg",
-            descripcion:
-              "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem et minus deserunt tempore adipisci molestias atque ipsam, iusto vitae ullam maxime quam error fugiat accusamus.",
-            imagen:
-              "https://res.cloudinary.com/josueeegl/image/upload/v1659677226/yourFinz/fondo8_xypuoh.png",
-          },
-          {
-            name: "Cultura Financiera",
-            autor: "Josueé GRCIA",
-            url: "https://res.cloudinary.com/josueeegl/image/upload/v1656367306/yourFinz/Mar-Business_11_habop5.jpg",
-            descripcion:
-              "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem et minus deserunt tempore adipisci molestias atque ipsam, iusto vitae ullam maxime quam error fugiat accusamus.",
-            imagen:
-              "https://res.cloudinary.com/josueeegl/image/upload/v1659677226/yourFinz/fondo8_xypuoh.png",
-          },
-          {
-            name: "Ahorro",
-            autor: "Josueé GRCIA",
-            url: "https://res.cloudinary.com/josueeegl/image/upload/v1656367306/yourFinz/Mar-Business_11_habop5.jpg",
-            descripcion:
-              "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem et minus deserunt tempore adipisci molestias atque ipsam, iusto vitae ullam maxime quam error fugiat accusamus.",
-            imagen:
-              "https://res.cloudinary.com/josueeegl/image/upload/v1659677226/yourFinz/fondo8_xypuoh.png",
-          },
-        ],
-      ],
-    },
-    {
-      title: "Como ahorrar",
-      data: [
-        [
-          {
-            name: "Isabel",
-            autor: "Josueé GRCIA",
-            url: "https://res.cloudinary.com/josueeegl/image/upload/v1656367306/yourFinz/Mar-Business_11_habop5.jpg",
-            descripcion:
-              "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem et minus deserunt tempore adipisci molestias atque ipsam, iusto vitae ullam maxime quam error fugiat accusamus.",
-            imagen:
-              "https://res.cloudinary.com/josueeegl/image/upload/v1659677226/yourFinz/fondo8_xypuoh.png",
-          },
-          {
-            name: "Isabel",
-            autor: "Josueé GRCIA",
-            url: "https://res.cloudinary.com/josueeegl/image/upload/v1656367306/yourFinz/Mar-Business_11_habop5.jpg",
-            descripcion:
-              "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem et minus deserunt tempore adipisci molestias atque ipsam, iusto vitae ullam maxime quam error fugiat accusamus.",
-            imagen:
-              "https://res.cloudinary.com/josueeegl/image/upload/v1659677226/yourFinz/fondo8_xypuoh.png",
-          },
-        ],
-      ],
-    },
-    {
-      title: "Estrategias para tener cultura financiera",
-      data: [
-        [
-          {
-            name: "Isabel",
-            autor: "Josueé GRCIA",
-            url: "https://res.cloudinary.com/josueeegl/image/upload/v1656367306/yourFinz/Mar-Business_11_habop5.jpg",
-            descripcion:
-              "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem et minus deserunt tempore adipisci molestias atque ipsam, iusto vitae ullam maxime quam error fugiat accusamus.",
-            imagen:
-              "https://res.cloudinary.com/josueeegl/image/upload/v1659677226/yourFinz/fondo8_xypuoh.png",
-          },
-          {
-            name: "Isabel",
-            autor: "Josueé GRCIA",
-            url: "https://res.cloudinary.com/josueeegl/image/upload/v1656367306/yourFinz/Mar-Business_11_habop5.jpg",
-            descripcion:
-              "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem et minus deserunt tempore adipisci molestias atque ipsam, iusto vitae ullam maxime quam error fugiat accusamus.",
-            imagen:
-              "https://res.cloudinary.com/josueeegl/image/upload/v1659677226/yourFinz/fondo8_xypuoh.png",
-          },
-        ],
-      ],
-    },
-  ];
 
   return (
     <View style={styles.container}>
@@ -146,13 +43,13 @@ export const HomeScreen = ({ navigation }) => {
         <View style={{ width: "100%", height: "100%", top: StatusBar.length }}>
           {info ? (
             <>
-              <HeaderTransactions totales={data} />
+              <HeaderTransactions totales={data[1] ? data[1] : "0"} />
             </>
           ) : (
             <HeaderTransactions totales={"0"} />
           )}
           <Stories
-            data={dat}
+            data={data[0]}
             visibility={visibility}
             setVisibility={setVisibility}
             setDataItem={setDataItem}

@@ -5,7 +5,7 @@ import { dominio } from "../config";
 
 export const onSubmitReg = (values, navigation, funcion) => {
   fetch(
-    `http://${dominio}:3000/user/register/?nombre=${values.nombre}&email=${values.email}&password=${values.password}`,
+    `${dominio}/user/register/?nombre=${values.nombre}&email=${values.email}&password=${values.password}`,
     {
       method: "POST",
     }
@@ -27,7 +27,7 @@ export const onSubmitReg = (values, navigation, funcion) => {
 export const onSubmitLog = (values, navigation, setLoader) => {
   setLoader(true);
   fetch(
-    `http://${dominio}:3000/user/login/?email=${values.email}&password=${values.password}`,
+    `${dominio}/user/login/?email=${values.email}&password=${values.password}`,
     { 
       method: "POST",
     }

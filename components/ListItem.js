@@ -61,7 +61,7 @@ export default ({
               setLoader,
               onDelete,
               item._id,
-              `http://${dominio}:3000/presupuesto`,
+              `${dominio}/presupuesto`,
               navigation,
               "Home",
               setLoading

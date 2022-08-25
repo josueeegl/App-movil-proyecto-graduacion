@@ -66,7 +66,7 @@ export const ModalTransactions = ({
   const enviar = () => {
     const data = formData(values, image);
     fetchPost(
-      `http://${dominio}:3000/transacciones`,
+      `${dominio}/transacciones`,
       data,
       setear,
       setLoader,
@@ -76,14 +76,18 @@ export const ModalTransactions = ({
   };
 
   const { loading, info } = fetchGet(
-    `http://${dominio}:3000/presupuesto`,
+    `${dominio}/presupuesto`,
     navigation,
     setLoader,
     setData
   );
 
   return (
-    <Modal animationType="slide" visible={visibility}>
+    <Modal
+      animationType="slide"
+      visible={visibility}
+      onRequestClose={() => setVisibility(false)}
+    >
       <View style={styles.container}>
         <KeyboardAwareScrollView>
           <ButtonGroup buttons={["GASTO", "INGRESO"]} afterClick={clickType} />

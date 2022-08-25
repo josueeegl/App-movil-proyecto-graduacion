@@ -16,7 +16,7 @@ import { fetchGet } from "../hooks";
 import { dominio } from "../config";
 import { FilterDates } from "../functions";
 
-const url = `http://${dominio}:3000/graficas`;
+const url = `${dominio}/graficas`;
 
 export const GraficaScreen = ({ navigation }) => {
   const [loader, setLoader] = useState(true);

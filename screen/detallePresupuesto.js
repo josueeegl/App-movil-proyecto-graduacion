@@ -31,7 +31,7 @@ export const detallePresupuesto = ({ navigation }) => {
     }
   };
   const { setLoading, loading, info } = fetchGet(
-    `http://${dominio}:3000/transacciones${id_presupuesto}`,
+    `${dominio}/transacciones${id_presupuesto}`,
     navigation,
     setLoader,
     setData
