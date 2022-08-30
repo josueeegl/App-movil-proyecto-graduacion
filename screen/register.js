@@ -94,9 +94,6 @@ export const RegisterScreen = ({ navigation }) => {
           secureTextEntry={true}
         />
         <ButtonGradient onPress={handleSubmit} texto={"Registrarse"} />
-        <Text style={styles.forgotPass}>O continúa con</Text>
-        <ButtonGoogle onPress={getUserData} />
-
         <ButtonReg
           onPress={() => navigation.navigate("Login")}
           texto={"Volver al inicio"}

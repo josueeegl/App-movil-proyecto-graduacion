@@ -43,8 +43,6 @@ export const LoginScreen = ({ navigation }) => {
           secureTextEntry={true}
         />
         <ButtonGradient onPress={handleSubmit} texto={"Iniciar sesión"} />
-        <Text style={styles.forgotPass}>O continúa con</Text>
-        <ButtonGoogle />
         <Text style={styles.forgotPass}>¿No tienes una cuenta?</Text>
         <ButtonReg
           onPress={() => navigation.navigate("RegisterScreen")}
