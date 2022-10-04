@@ -80,7 +80,7 @@ export const PresupuestoScreen = ({ navigation }) => {
               renderItem={({ item, index }) => (
                 <ListItem
                   onPress={() =>
-                    navigation.navigate("Detalle", { _id: item._id })
+                    navigation.navigate("Detalle", { _id: item._id, nombre: item.nombre })
                   }
                   editar={editar}
                   onDelete={onDelete}

@@ -35,6 +35,7 @@ export default ({ data, visibility, setVisibility, setDataItem }) => {
       keyExtractor={(item, index) => index.toString()}
       sections={data}
       renderItem={({ item }) => (
+        
         <ScrollView
           style={{flex: 1, marginLeft: 10, marginRight: 10, }}
           horizontal

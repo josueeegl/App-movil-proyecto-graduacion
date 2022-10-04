@@ -13,6 +13,7 @@ import { IconButton } from "react-native-paper";
 import { ListRegistros, Apploader, HeaderTransactions } from "../components";
 import { ModalTransactions } from "../components/ModalTransactions";
 import { dominio } from "../config";
+import { pdf } from "../functions";
 
 const { width, height } = Dimensions.get("window");
 
@@ -22,6 +23,7 @@ export const detallePresupuesto = ({ navigation }) => {
   const [data, setData] = useState([]);
 
   const id_presupuesto = navigation.getParam("_id");
+  const nombre_presupuesto = navigation.getParam("nombre");
 
   const setear = () => {
     if (visibility === true) {
@@ -111,6 +113,13 @@ export const detallePresupuesto = ({ navigation }) => {
         onPress={setear}
         style={styles.btnContainer}
       />
+      <IconButton
+        icon="monitor-share"
+        color="#eee"
+        size={35}
+        onPress={() => pdf(nuevo, totales, nombre_presupuesto)}
+        style={styles.btnShare}
+      />
       <ModalTransactions
         visibility={visibility}
         setVisibility={setVisibility}
@@ -137,5 +146,10 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: height - 80,
     right: -12,
+  },
+  btnShare: {
+    position: "absolute",
+    bottom: height - 80,
+    left: -5,
   },
 });
