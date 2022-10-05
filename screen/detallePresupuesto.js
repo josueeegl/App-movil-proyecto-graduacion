@@ -114,7 +114,7 @@ export const detallePresupuesto = ({ navigation }) => {
         style={styles.btnContainer}
       />
       <IconButton
-        icon="monitor-share"
+        icon="share-variant"
         color="#eee"
         size={35}
         onPress={() => pdf(nuevo, totales, nombre_presupuesto)}
