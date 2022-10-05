@@ -24,7 +24,7 @@ export const DetailTransactions = ({ navigation, pantalla }) => {
   const [descripcion, setDescripcion] = useState("");
   const [tipoPago, setTipoPago] = useState("");
   const [date, setDate] = useState(null);
-  const data = {};
+  const data = {}; 
   const fechayhora = new Date(items.fecha).toString().split(" ").splice(0, 4);
 
   const d = `${fechayhora[2]} de ${formatearYear(fechayhora[1])} del ${

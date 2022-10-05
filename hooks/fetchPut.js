@@ -12,7 +12,6 @@ export default (url, data, navigation, pantalla) => {
       body: JSON.stringify(data),
     })
       .then((x) => {
-        console.log(x.status);
         if (x.status == 204) {
           return Alert.alert("Exito!", "Cambios realizados", [
             {

@@ -5,7 +5,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export default (url, navigation, setLoader, setData) => {
   const [loading, setLoading] = useState(true);
   const [info, setInfo] = useState(true);
-  
 
   const fetchData = () => {
     AsyncStorage.getItem("token").then(async (x) => {
@@ -34,7 +33,6 @@ export default (url, navigation, setLoader, setData) => {
             "Error",
             "Hubo un error, verifica la red e intenta de nuevo."
           );
-          
         });
     });
   };

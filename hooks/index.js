@@ -4,7 +4,6 @@ export { default as onSubmitX } from "./fetchX";
 export { default as fetchPut } from "./fetchPut";
 export { default as ObtenerUser } from "./obtenerUser";
 export { default as fetchPost } from "./fetchPost";
-export { default as logGoogle } from "./logGoogle";
 export { default as fetchGet } from "./fetchGet";
 export { default as useForm } from "./useForm";
 export { formatear, formatearYear } from "./formatDate";

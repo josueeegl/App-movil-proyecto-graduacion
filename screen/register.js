@@ -53,7 +53,6 @@ export const RegisterScreen = ({ navigation }) => {
         .then((x) => x.json())
         .then((x) => {
           if (x) {
-            console.log(x);
             Alert.alert(`Bienvenido ${x.name}`, "Registrado correctmente", [
               {
                 text: "Ir al inicio",

@@ -3,9 +3,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default(values, navigation, limpiar, url, texto, id) => {
   AsyncStorage.getItem("token").then((x) => {
-    console.log(values);
-    console.log(id);
-    console.log(texto);
     if (x) {
       if (texto === "Actualizar") {
         url += id;
