@@ -10,9 +10,10 @@ import {
 } from "react-native";
 import { Apploader, ListDinero } from "../components";
 import { ModalTransactions } from "../components/ModalTransactions";
-import { fetchGet } from "../hooks";
+import { fetchGet, formatearYear, formatear } from "../hooks";
 import { dominio } from "../config";
 import { IconButton } from "react-native-paper";
+import { pdfHistorial } from "../functions";
 
 const url = `${dominio}/transacciones/detalle`;
 
@@ -49,7 +50,26 @@ export const DineroScreen = ({ navigation }) => {
           x.descrip.toUpperCase().indexOf(text.toUpperCase()) > -1 ||
           x.valor.toString().toUpperCase().indexOf(text.toUpperCase()) > -1
       );
-      setFilter(newData);
+      if (newData.length === 0) {
+        let rt = [];
+        datos.map((items) => {
+          const fechayhora = new Date(items.fecha)
+            .toString()
+            .split(" ")
+            .splice(0, 4);
+          const d = `${formatear(fechayhora[0])} ${
+            fechayhora[2]
+          } de ${formatearYear(fechayhora[1])}`;
+
+          if (d.toUpperCase().indexOf(text.toUpperCase()) > -1) {
+            rt.push(items);
+          }
+        });
+        setFilter(rt);
+        rt = [];
+      } else {
+        setFilter(newData);
+      }
     } else {
       setFilter([]);
     }
@@ -62,13 +82,20 @@ export const DineroScreen = ({ navigation }) => {
       ) : (
         <View style={{ width: "100%", height: "100%", top: StatusBar.length }}>
           <View style={{ flexDirection: "row" }}>
+            <IconButton
+              icon="share-variant"
+              color="#eee"
+              size={35}
+              onPress={() => pdfHistorial(filter.length === 0 ? data : filter)}
+              style={{ top: 15 }}
+            />
             <TextInput
               style={{
                 top: 20,
-                left: 10,
+                left: -5,
                 marginBottom: 30,
                 height: 50,
-                width: "79%",
+                width: "72%",
                 fontSize: 14,
                 color: "white",
                 alignSelf: "center",
@@ -88,6 +115,7 @@ export const DineroScreen = ({ navigation }) => {
               color="#4F93BC"
               size={50}
               onPress={setear}
+              style={{ right: 20, top:3 }}
             />
             <ModalTransactions
               visibility={visibility}

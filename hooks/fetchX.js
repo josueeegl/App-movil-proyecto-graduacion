@@ -16,7 +16,6 @@ export default(values, navigation, limpiar, url, texto, id) => {
         body: JSON.stringify(values),
       })
         .then((x) => {
-          console.log(x.status);
           if (x.status == 201 || x.status == 204) {
             return Alert.alert("Exito!", "Cambios realizados", [
               {
