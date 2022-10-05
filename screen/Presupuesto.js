@@ -65,7 +65,7 @@ export const PresupuestoScreen = ({ navigation }) => {
 
   return (
     <View style={estilos.container}>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="light-content" backgroundColor="black"/>
       {loading ? (
         <Apploader />
       ) : (

@@ -5,16 +5,13 @@ import {
   TextInput,
   View,
   StyleSheet,
-  Dimensions,
+  Dimensions, StatusBar
 } from "react-native";
 const { width, height } = Dimensions.get("window");
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { SvgTop, ButtonGradient, ButtonReg, ButtonGoogle } from "../styles";
 import { onSubmitReg, useForm, logGoogle } from "../hooks";
-import * as Google from "expo-auth-session/providers/google";
-import * as WebBrowser from "expo-web-browser";
 
-WebBrowser.maybeCompleteAuthSession();
 
 export const RegisterScreen = ({ navigation }) => {
   const initialState = {
@@ -28,43 +25,10 @@ export const RegisterScreen = ({ navigation }) => {
     navigation
   );
 
-  const [accessToken, setAccessToken] = useState();
-  const [request, response, promptAsync] = Google.useAuthRequest({
-    androidClientId:
-      "651270985032-1b66b5p3001h0idg3k4eo80p767h77v7.apps.googleusercontent.com",
-    iosClientId:
-      "651270985032-oji9fogr16k8cm0e871imolu5q37meqa.apps.googleusercontent.com",
-    expoClientId:
-      "651270985032-ufqaq8njjs4uafhh34c43mfefqpdj7ag.apps.googleusercontent.com",
-  });
-
-  useEffect(() => {
-    if (response?.type === "success") {
-      setAccessToken(response.authentication.accessToken);
-    }
-  }, []);
-
-  async function getUserData() {
-    await promptAsync({ showInRecents: true });
-    if (accessToken) {
-      await fetch("https://www.googleapis.com/userinfo/v2/me", {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      })
-        .then((x) => x.json())
-        .then((x) => {
-          if (x) {
-            Alert.alert(`Bienvenido ${x.name}`, "Registrado correctmente", [
-              {
-                text: "Ir al inicio",
-                onPress: () => navigation.navigate("Login"),
-              },
-            ]);
-          }
-        });
-    }
-  }
+  
   return (
     <KeyboardAwareScrollView style={styles.MainContainer}>
+      <StatusBar barStyle="light-content" backgroundColor="black"/>
       <View style={styles.containerSVG}>
         <SvgTop />
       </View>

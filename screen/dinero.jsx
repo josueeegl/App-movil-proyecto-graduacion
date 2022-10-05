@@ -77,6 +77,7 @@ export const DineroScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor="black"/>
       {loading ? (
         <Apploader />
       ) : (
@@ -87,12 +88,12 @@ export const DineroScreen = ({ navigation }) => {
               color="#eee"
               size={35}
               onPress={() => pdfHistorial(filter.length === 0 ? data : filter)}
-              style={{ top: 15 }}
+              style={{ top: 15, left: -5 }}
             />
             <TextInput
               style={{
                 top: 20,
-                left: -5,
+                left: -15,
                 marginBottom: 30,
                 height: 50,
                 width: "72%",
@@ -115,7 +116,7 @@ export const DineroScreen = ({ navigation }) => {
               color="#4F93BC"
               size={50}
               onPress={setear}
-              style={{ right: 20, top:3 }}
+              style={{ right: 35, top:3 }}
             />
             <ModalTransactions
               visibility={visibility}

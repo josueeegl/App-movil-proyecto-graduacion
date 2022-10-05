@@ -6,7 +6,7 @@ import {
   TextInput,
   Text,
   Image,
-  Alert,
+  Alert, StatusBar
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { IconButton } from "react-native-paper";
@@ -54,6 +54,7 @@ export const DetailTransactions = ({ navigation, pantalla }) => {
   };
   return (
     <View style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor="black"/>
       <View
         style={[
           StyleSheet.absoluteFillObject,

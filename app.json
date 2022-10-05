@@ -2,7 +2,7 @@
   "expo": {
     "name": "yourFinz",
     "slug": "yourFinz",
-    "version": "1.0.0",
+    "version": "1.0.3",
     "icon": "./assets/logotras.png",
     "scheme": "testing",
     "ios": {
@@ -12,7 +12,11 @@
     "android": {
       "package": "com.josuegl.yourFinz",
       "versionCode": 1
+    },
+    "extra": {
+      "eas": {
+        "projectId": "8ca7f814-cf4b-4477-922e-078c806fd0e7"
+      }
     }
-    
   }
 }

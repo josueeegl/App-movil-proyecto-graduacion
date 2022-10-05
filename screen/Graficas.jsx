@@ -32,7 +32,7 @@ export const GraficaScreen = ({ navigation }) => {
   );
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="light-content" backgroundColor="black"/>
       {loading ? (
         <Apploader />
       ) : (

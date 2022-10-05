@@ -42,7 +42,7 @@ export const detallePresupuesto = ({ navigation }) => {
   const nuevo = data.filter((item) => typeof item === "object");
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="light-content" backgroundColor="black"/>
       {loading ? (
         <Apploader />
       ) : (

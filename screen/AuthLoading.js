@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { ActivityIndicator, View, Image, StyleSheet } from "react-native";
+import { ActivityIndicator, View, Image, StyleSheet, StatusBar } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import LottieView from "lottie-react-native";
 
@@ -14,6 +14,7 @@ export const AuthLoading = ({ navigation }) => {
   }, []);
   return (
     <View style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor="black"/>
       <ActivityIndicator />
       <Image
         style={{ width: 100, height: 100, marginBottom: 15 }}

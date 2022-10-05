@@ -6,7 +6,7 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
-  Alert,
+  Alert,StatusBar
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -25,6 +25,7 @@ export const OPScreen = ({ navigation }) => {
 
   return (
     <KeyboardAwareScrollView style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor="black"/>
       <View style={styles.containerImage}>
         <Image
           source={{

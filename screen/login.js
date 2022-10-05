@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Text, TextInput, View, StyleSheet, Dimensions } from "react-native";
+import { Text, TextInput, View, StyleSheet, Dimensions, StatusBar } from "react-native";
 const { width, height } = Dimensions.get("window");
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { SvgTop, ButtonGradient, ButtonReg, ButtonGoogle } from "../styles";
@@ -20,7 +20,8 @@ export const LoginScreen = ({ navigation }) => {
   );
   return (
     <>
-    <KeyboardAwareScrollView style={styles.MainContainer}>
+      <KeyboardAwareScrollView style={styles.MainContainer}>
+      <StatusBar barStyle="light-content" backgroundColor="black"/>
       <View style={styles.containerSVG}>
         <SvgTop />
       </View>
