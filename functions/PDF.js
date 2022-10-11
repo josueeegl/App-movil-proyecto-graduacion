@@ -40,7 +40,7 @@ let generarPDF = async (html, name) => {
 const html1 = (title) => {
   const ht = `
     <html>
-  <body>
+  <body> 
   <div class="divH">
       <h1>Presupuesto ${title}</h1>
       <img
